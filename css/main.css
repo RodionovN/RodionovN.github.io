@@ -320,7 +320,7 @@ button:hover, button:active, button:focus {
 }
 .content {
 	background-color: #444;
-	color: #C4BE92;
+	
     text-align: left;
 	/* rounded corners */
     -webkit-border-radius: 12px;
@@ -375,4 +375,8 @@ button:hover, button:active, button:focus {
 } 
 .karmZn{
   text-align: center;
+}
+
+#table2{
+	color: #C4BE92;
 }

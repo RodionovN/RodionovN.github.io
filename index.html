@@ -1,287 +1,305 @@
-
+<!DOCTYPE html>
 <html>
+
 <head>
-<title></title>
-<link href="css/main.css" rel="stylesheet" type="text/css">
-<meta charset="UTF-8">
+    <title></title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
 
 </head>
-<script src="scripts/scripts.js"> </script>
+<script src="scripts/scripts.js">
+</script>
 
 <body onload="zapolnenie()">
 
-<div id="pict">
-<a href="pictures/Shadowrun_5_rus_perevod_GMD_v1_2.pdf"><img src="pictures/lable.png" alt="lable" width="100" height="100" align="right"/></a></div>	
-<h1 id="ShadowRun">
-	SHADOWRUN	
-	
-</h1>
+    <div id="pict">
+        <a href="pictures/Shadowrun_5_rus_perevod_GMD_v1_2.pdf"><img src="pictures/lable.png" alt="lable" width="100" height="100" align="right" /></a>
+    </div>
+    <h1 id="ShadowRun">
+        SHADOWRUN
 
-<div class="selection">
-		<lable id="rassa">Расса:</lable>
+    </h1>
+
+    <div class="selection">
+        <lable id="rassa">Расса:</lable>
         <select id="race" onchange="changeRace()"><br></select>
-		<lable id="gmr">Спец. атрибуты:</lable>
-        <select < id="atr" onchange="changeAtr()"><br></select> 
-		<lable id="haracteristic" >Атрибуты:</lable>
-        <select id="atribut" onchange="changeAtribut()"><br></select> 
-		<lable id="magsince">Магия/Резонанс:</lable>
+        <lable id="gmr">Спец. атрибуты:</lable>
+        <select < id="atr" onchange="changeAtr()"><br></select>
+        <lable id="haracteristic">Атрибуты:</lable>
+        <select id="atribut" onchange="changeAtribut()"><br></select>
+        <lable id="magsince">Магия/Резонанс:</lable>
         <select id="mag" onchange="changeMag()"><br>
         </select>
-		 <lable id="magsince">Умения:</lable>
-   <select id="skils" onchange="changeSkils()"><br>		
-        </select> 
- <lable id="magsince">Наличность:</lable><select id="newyen">
+        <lable id="magsince">Умения:</lable>
+        <select id="skils" onchange="changeSkils()"><br>		
         </select>
-  <lable id="text6">¥</lable>
-  <hr id="Line"></hr>
- </div>
- 
- <div class="table">
-	<table border="1" width="100%" cellpadding="5">
-   <tr>
-    <th id="text01">Магия/Резонанс:</th>
-    <th id="text02">Умения:</th>
-	<th id="text03">Рейтинг умений:</th>
-	<th id="text04">Группа умений:</th>
-	<th id="text05">Заклинания/Комплексные формы:</th>
-   </tr>
-   <tr>
-    <td id="text1">0</td>
-    <td id="text2">0</td>
-	<td id="text3">0</td>
-	<td id="text4">0</td>
-	<td id="text5">0</td>
-  </tr>
- </table>
- </div>
-<div class="countUm">
-<lable>Очки умений:</lable>
-<lable id="countUm">14</lable>
-</div>
-<div class="box" id="box1">
-	<div class="har" id="har1">
-        <label for="qty1"><abbr title="Quantity">Тело</abbr></label>
-        <input id="qty1" value="0/7" readonly/>
-        <button id="down1" onclick="modify_qty(-1,'qty1')">-1</button>
-        <button id="up1" onclick="modify_qty(1,'qty1')">+1</button>
-	</div>
-	<div class="har" id="har2">
-        <label for="qty2"><abbr title="Quantity">Ловкость</abbr></label>
-        <input id="qty2" value="0/5" readonly/>
-        <button id="down2" onclick="modify_qty(-1, 'qty2')">-1</button>
-        <button id="up2" onclick="modify_qty(1,'qty2')">+1</button>
-	</div>
-	<div class="har" id="har3">
-		<label for="qty3"><abbr title="Quantity">Раекция</abbr></label>
-        <input id="qty3" value="0/7" readonly/>
-        <button id="down3" onclick="modify_qty(-1,'qty3')">-1</button>
-        <button id="up3" onclick="modify_qty(1,'qty3')">+1</button>
-	</div>
-	<div class="har" id="har4">
-        <label for="qty4"><abbr title="Quantity">Сила</abbr></label>
-        <input id="qty4" value="0/5" readonly/>
-        <button id="down4" onclick="modify_qty(-1, 'qty4')">-1</button>
-        <button id="up4" onclick="modify_qty(1,'qty4')">+1</button>
-	</div>
-	<div class="har" id="har5">
-		<label for="qty5"><abbr title="Quantity">Сила воли</select></abbr></abbr></label>
-        <input id="qty5" value="0/7" readonly/>
-        <button id="down5" onclick="modify_qty(-1,'qty5')">-1</button>
-        <button id="up5" onclick="modify_qty(1,'qty5')">+1</button>
-	</div>
-	<div class="har" id="har6">
-        <label for="qty6"><abbr title="Quantity">Логика</abbr></label>
-        <input id="qty6" value="0/5" readonly/>
-        <button id="down6" onclick="modify_qty(-1, 'qty6')">-1</button>
-        <button id="up6" onclick="modify_qty(1,'qty6')">+1</button>
-	</div>
-	<div class="har" id="har7">
-		<label for="qty7"><abbr title="Quantity">Интуиция</abbr></label>		
-        <input id="qty7" value="0/7" readonly/>
-        <button id="down7" onclick="modify_qty(-1,'qty7')">-1</button>
-        <button id="up7" onclick="modify_qty(1,'qty7')">+1</button>
-	</div>
-	<div class="har" id="har8">
-        <label for="qty8"><abbr title="Quantity">Харизма</abbr></label>
-        <input id="qty8" value="0/5" readonly/>
-        <button id="down8" onclick="modify_qty(-1, 'qty8')">-1</button>
-        <button id="up8" onclick="modify_qty(1,'qty8')">+1</button>
-	</div>
-		<div class="har" id="har8">
-        <label for="qtyIni"><abbr title="Quantity">Инициатива</abbr></label>
-        <input id="qtyIni" value="2" readonly/>
-	</div>
-	</div>
-<div class="countUm">
-<lable font-size="25px"><br>Спец артибуты:</lable>
-<lable id="countSpec">1</lable>
-</div>
-<div class="box" id="box1">
-	<div class="har" id="har9">
-		<label for="qty9"><abbr title="Quantity">Грань</abbr></label>
-        <input id="qty9" value="0/5" readonly/>
-        <button id="down9" onclick="modify_qty(-1, 'qty9')">-1</button>
-        <button id="up9" onclick="modify_qty(1,'qty9')">+1</button>
-		</div>
-		<div class="har" id="har10">
-		<label for="qty10"><abbr title="Quantity">Магия</abbr></label>
-        <input id="qty10" value="0/0" readonly/>
-        <button id="down10" onclick="modify_qty(-1, 'qty10')">-1</button>
-        <button id="up10" onclick="modify_qty(1,'qty10')">+1</button>
-		</div>
-		<div class="har" id="har11">
-		<label for="qty11"><abbr title="Quantity">Резонанс</abbr></label>
-        <input id="qty11" value="0/0" readonly/>
-        <button id="down11" onclick="modify_qty(-1, 'qty11')">-1</button>
-        <button id="up11" onclick="modify_qty(1,'qty11')">+1</button>
-		</div>
+        <lable id="magsince">Наличность:</lable><select id="newyen">
+        </select>
+        <lable id="text6">¥</lable>
+        <hr id="Line"></hr>
     </div>
-<div class="countUm">
-<lable title="Карма должна быть больше, либо равна нулю"><br>Карма:</lable>
-<lable id="countKach" title="Карма должна быть больше, либо равна нулю" >25</lable>
-</div>
-<div class="plusKachestva">
-  <button id="plusKachBut" onClick="openKachBut('win')" type="button">Положительные качества</button> 
-<dl class="plusKachestva" id="plusKachestva">
-  <dt>Тут будут положительные качества.</dt>
-</dl>
-</div>	
-<div class="plusKachestva">
-  <button id="plusKachBut" onClick="openKachBut('win2')" type="button">Отрицательные качества</button> 
-<dl class="plusKachestva" id="minusKachestva">
-  <dt>Тут будут отрицательные качества.</dt>
-</dl>
-</div>
-<div id="win" style="display:none;">
-   <div class="overlay"></div>
-		<div class="visible">
-			<h2 class="countUm" title="Положительные качества тратят карму"><div>Положительные качества</div></h2>
-				<div class="content" id="contentPlusKach">
-					<div>
-						<div class="table2">
-							<table border="0" width="100%" cellpadding="5">
-                <tr>
-							<td>
-                Качество
-                  </td>
-                  <td class="karmZn">
-                Карма
-                  </td>
-                  <td>                
-                  </td>
-                </tr>
-						   <tr>
-							<td id="pk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
-                 <td id="pkv1" class="karmZn">4</td>
-							<td id="pkb1" ><button class="onoff" onclick="onoff('pk1','pkv1', this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>                 
-                 <td id="pkv2" class="karmZn">5</td>
-							<td id="pkb2" ><button class="onoff" onclick="onoff('pk2','pkv2',this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
-Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>                 
-                 <td id="pkv3" class="karmZn">10</td>
-							<td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>                 
-                 <td id="pkv4" class="karmZn">5</td>
-							<td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость к духам</td>                 
-                 <td id="pkv5" class="karmZn">7</td>
-							<td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
-						  </tr>
-                <tr>
-							<td id="pk6" title="Персонаж с этим качеством получает бонус +2 к набору кубиков при всех проверках Лечения направленных на него, а так же магическом лечении.">Быстрое исцеление</td>                 
-                 <td id="pkv6" class="karmZn">3</td>
-							<td id="pkb6"><button class="onoff" onclick="onoff('pk6','pkv6',this)"><div>off</div></button></td>
-						  </tr>
-                <tr>
-							<td id="pk7" title="За каждую единицу рейтинга качества персонаж получает одну доп.клетку Блока Переполнения Повреждений. Позволяют персонажу вынести больше повреждений перед смертью. Не поднимают порог перед впадением в беспамятство, не влияют на получаемые персонажем модификаторы повреждений.">Воля к жизни</td>                 
-                 <td id="pkv7" class="karmZn">3</td>
-                  <td id="pkb7"><button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
-                  <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
-                  <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button></td>
-						  </tr>
-                <tr>
-							<td id="pk8" title="За каждую единицу рейтинга качества при расчете модификаторов ран персонаж игнорирует одну клетку повреждений. Не может быть использовано адептом с силой Сопротивление боли или биовером компенсатор повреждений.">Высокая болевая устойчивость</td>                 
-                 <td id="pkv8" class="karmZn">7</td>
-                  <td id="pkb8"><button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
-                  <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
-                  <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button></td>
-						  </tr>
-                <tr>
-							<td id="pk9" title="Персонаж с этим качеством имеет поразительно гибкие суставы. Персонаж получает бонус +2 к набору кубиков при проверке исскуства побега, может протиснуться в тесные и маленькие пространства, имеет успех в барах и на вечеринках.">Гуттаперчивый</td>                 
-                 <td id="pkv9" class="karmZn">6</td>
-                  <td id="pkb9"><button class="onoff" onclick="onoff('pk9','pkv9',this)"><div>off</div></button>
-                  <button class="onoff" onclick="onoff('pk9','pkv9',this)"><div>off</div></button></td>
-						  </tr>
-                
-						   					  
-						</table>
-						</div>
-					</div>
-				</div>			
-			<button type="button" onClick="closeKachBut('plusKachestva', 1, 'win')">закрыть</button>
-		</div>
-</div>
-<div id="win2" style="display:none;">
-   <div class="overlay"></div>
-		<div class="visible">
-			<h2 class="countUm" title="Отрицательные качества добавляют карму"><div>Отрицательные качества</div></h2>
-				<div class="content" id="contentPlusKach">
-					<div>
-						<div class="table2">
-							<table border="0" width="100%" cellpadding="5">
-                <tr>
-							<td>
-                Качество
-                  </td>
-                  <td class="karmZn">
-                Карма
-                  </td>
-                  <td>                
-                  </td>
-                </tr>
-						   <tr>
-							<td id="mk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
-                 <td id="mkv1" class="karmZn">4</td>
-							<td id="mkb1" ><button class="onoff" onclick="onoff('mk1','mkv1', this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="mk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>                 
-                 <td id="mkv2" class="karmZn">5</td>
-							<td id="mkb2" ><button class="onoff" onclick="onoff('mk2','mkv2',this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
-Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>                 
-                 <td id="pkv3" class="karmZn">10</td>
-							<td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>                 
-                 <td id="pkv4" class="karmZn">5</td>
-							<td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость ergh</td>                 
-                 <td id="pkv5" class="karmZn">7</td>
-							<td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
-						  </tr>		   
-                
-						   					  
-						</table>
-						</div>
-					</div>
-				</div>			
-			<button type="button" onClick="closeKachBut('minusKachestva', 0, 'win2')">закрыть</button>
-		</div>
-</div>
+
+    <div class="table">
+        <table border="1" width="100%" cellpadding="5">
+            <tr>
+                <th id="text01">Магия/Резонанс:</th>
+                <th id="text02">Умения:</th>
+                <th id="text03">Рейтинг умений:</th>
+                <th id="text04">Группа умений:</th>
+                <th id="text05">Заклинания/Комплексные формы:</th>
+            </tr>
+            <tr>
+                <td id="text1">0</td>
+                <td id="text2">0</td>
+                <td id="text3">0</td>
+                <td id="text4">0</td>
+                <td id="text5">0</td>
+            </tr>
+        </table>
+    </div>
+    <div class="countUm">
+        <lable>Очки умений:</lable>
+        <lable id="countUm">14</lable>
+    </div>
+    <div class="box" id="box1">
+        <div class="har" id="har1">
+            <label for="qty1"><abbr title="Quantity">Тело</abbr></label>
+            <input id="qty1" value="0/7" readonly/>
+            <button id="down1" onclick="modify_qty(-1,'qty1')">-1</button>
+            <button id="up1" onclick="modify_qty(1,'qty1')">+1</button>
+        </div>
+        <div class="har" id="har2">
+            <label for="qty2"><abbr title="Quantity">Ловкость</abbr></label>
+            <input id="qty2" value="0/5" readonly/>
+            <button id="down2" onclick="modify_qty(-1, 'qty2')">-1</button>
+            <button id="up2" onclick="modify_qty(1,'qty2')">+1</button>
+        </div>
+        <div class="har" id="har3">
+            <label for="qty3"><abbr title="Quantity">Раекция</abbr></label>
+            <input id="qty3" value="0/7" readonly/>
+            <button id="down3" onclick="modify_qty(-1,'qty3')">-1</button>
+            <button id="up3" onclick="modify_qty(1,'qty3')">+1</button>
+        </div>
+        <div class="har" id="har4">
+            <label for="qty4"><abbr title="Quantity">Сила</abbr></label>
+            <input id="qty4" value="0/5" readonly/>
+            <button id="down4" onclick="modify_qty(-1, 'qty4')">-1</button>
+            <button id="up4" onclick="modify_qty(1,'qty4')">+1</button>
+        </div>
+        <div class="har" id="har5">
+            <label for="qty5"><abbr title="Quantity">Сила воли</select></abbr></abbr></label>
+            <input id="qty5" value="0/7" readonly/>
+            <button id="down5" onclick="modify_qty(-1,'qty5')">-1</button>
+            <button id="up5" onclick="modify_qty(1,'qty5')">+1</button>
+        </div>
+        <div class="har" id="har6">
+            <label for="qty6"><abbr title="Quantity">Логика</abbr></label>
+            <input id="qty6" value="0/5" readonly/>
+            <button id="down6" onclick="modify_qty(-1, 'qty6')">-1</button>
+            <button id="up6" onclick="modify_qty(1,'qty6')">+1</button>
+        </div>
+        <div class="har" id="har7">
+            <label for="qty7"><abbr title="Quantity">Интуиция</abbr></label>
+            <input id="qty7" value="0/7" readonly/>
+            <button id="down7" onclick="modify_qty(-1,'qty7')">-1</button>
+            <button id="up7" onclick="modify_qty(1,'qty7')">+1</button>
+        </div>
+        <div class="har" id="har8">
+            <label for="qty8"><abbr title="Quantity">Харизма</abbr></label>
+            <input id="qty8" value="0/5" readonly/>
+            <button id="down8" onclick="modify_qty(-1, 'qty8')">-1</button>
+            <button id="up8" onclick="modify_qty(1,'qty8')">+1</button>
+        </div>
+        <div class="har" id="har8">
+            <label for="qtyIni"><abbr title="Quantity">Инициатива</abbr></label>
+            <input id="qtyIni" value="2" readonly/>
+        </div>
+    </div>
+    <div class="countUm">
+        <lable font-size="25px"><br>Спец артибуты:</lable>
+        <lable id="countSpec">1</lable>
+    </div>
+    <div class="box" id="box1">
+        <div class="har" id="har9">
+            <label for="qty9"><abbr title="Quantity">Грань</abbr></label>
+            <input id="qty9" value="0/5" readonly/>
+            <button id="down9" onclick="modify_qty(-1, 'qty9')">-1</button>
+            <button id="up9" onclick="modify_qty(1,'qty9')">+1</button>
+        </div>
+        <div class="har" id="har10">
+            <label for="qty10"><abbr title="Quantity">Магия</abbr></label>
+            <input id="qty10" value="0/0" readonly/>
+            <button id="down10" onclick="modify_qty(-1, 'qty10')">-1</button>
+            <button id="up10" onclick="modify_qty(1,'qty10')">+1</button>
+        </div>
+        <div class="har" id="har11">
+            <label for="qty11"><abbr title="Quantity">Резонанс</abbr></label>
+            <input id="qty11" value="0/0" readonly/>
+            <button id="down11" onclick="modify_qty(-1, 'qty11')">-1</button>
+            <button id="up11" onclick="modify_qty(1,'qty11')">+1</button>
+        </div>
+    </div>
+    <div class="countUm">
+        <lable title="Карма должна быть больше, либо равна нулю"><br>Карма:</lable>
+        <lable id="countKach" title="Карма должна быть больше, либо равна нулю">25</lable>
+    </div>
+    <div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win')" type="button">Положительные качества</button>
+        <dl class="plusKachestva" id="plusKachestva">
+            <dt>Тут будут положительные качества.</dt>
+        </dl>
+    </div>
+    <div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win2')" type="button">Отрицательные качества</button>
+        <dl class="plusKachestva" id="minusKachestva">
+            <dt>Тут будут отрицательные качества.</dt>
+        </dl>
+    </div>
+    <div id="win" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Положительные качества тратят карму">
+                <div>Положительные качества</div>
+            </h2>
+            <div class="content" id="contentPlusKach">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Качество
+                                </td>
+                                <td class="karmZn">
+                                    Карма
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="pk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
+                                <td id="pkv1" class="karmZn">4</td>
+                                <td id="pkb1"><button class="onoff" onclick="onoff('pk1','pkv1', this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>
+                                <td id="pkv2" class="karmZn">5</td>
+                                <td id="pkb2"><button class="onoff" onclick="onoff('pk2','pkv2',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
+Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>
+                                <td id="pkv3" class="karmZn">10</td>
+                                <td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>
+                                <td id="pkv4" class="karmZn">5</td>
+                                <td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость к духам</td>
+                                <td id="pkv5" class="karmZn">7</td>
+                                <td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk6" title="Персонаж с этим качеством получает бонус +2 к набору кубиков при всех проверках Лечения направленных на него, а так же магическом лечении.">Быстрое исцеление</td>
+                                <td id="pkv6" class="karmZn">3</td>
+                                <td id="pkb6"><button class="onoff" onclick="onoff('pk6','pkv6',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk7" title="За каждую единицу рейтинга качества персонаж получает одну доп.клетку Блока Переполнения Повреждений. Позволяют персонажу вынести больше повреждений перед смертью. Не поднимают порог перед впадением в беспамятство, не влияют на получаемые персонажем модификаторы повреждений.">Воля к жизни</td>
+                                <td id="pkv7" class="karmZn">3</td>
+                                <td id="pkb7"><button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
+                                    <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
+                                    <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk8" title="За каждую единицу рейтинга качества при расчете модификаторов ран персонаж игнорирует одну клетку повреждений. Не может быть использовано адептом с силой Сопротивление боли или биовером компенсатор повреждений.">Высокая болевая устойчивость</td>
+                                <td id="pkv8" class="karmZn">7</td>
+                                <td id="pkb8"><button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
+                                    <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
+                                    <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk9" title="Персонаж с этим качеством имеет поразительно гибкие суставы. Персонаж получает бонус +2 к набору кубиков при проверке исскуства побега, может протиснуться в тесные и маленькие пространства, имеет успех в барах и на вечеринках.">Гуттаперчивый</td>
+                                <td id="pkv9" class="karmZn">6</td>
+                                <td id="pkb9"><button class="onoff" onclick="onoff('pk9','pkv9',this)"><div>off</div></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="pk10" title="Наставник означает, что персонаж связан с духомпокровителем наставляющим его в магических практиках и обеспечивающим определёнными преимуществами и неудобствами. Персонаж может сменить духа-наставника, но одномоментно у него может быть не более одного духа-наставника. Для смены духа-наставника персонаж сначала должен купить это качество, как если бы оно было Отрицательным. Затем он может приобрести это качество снова, с другим духом-наставником. Цена качества представляет собой пошлину за развод с одним духом и заключение союза с другим. Это качество доступно только персонажам имеющим рейтинг атрибута Магия.">Дух-Наставник</td>
+                                <td id="pkv10" class="karmZn">5</td>
+                                <td id="pkb10"><button class="onoff" onclick="onoff('pk10','pkv10',this)"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk11" title="Персонаж с Естественным Иммунитетом имеет врождённый и выработанный иммунитет к одной болезни или токсину. Это качество доступно в двух вариантах. Вариант за 4 очка Кармы даёт иммунитет к одному природному токсину или болезни. Если же приобретается вариант за 10 очков, иммунитет действует против одного синтетического (искусственно созданного) токсина или болезни. Естественный Иммунитет не работает против заболеваний и токсинов имеющих магическую природу, таких как ВВЧМЧ. Игрок и МИ должны решить, к какой болезни, наркотику или яду у персонажа иммунитет. В течении шести часов персонаж может принять одну дозу препарата или яда без получения каких либо негативных эффектов. Любая последующая доза или воздействие наносит обычный урон, но время восстановления персонажа уменьшается вдвое. Обратите внимание, персонаж имеющий Естественный Иммунитет может служить переносчиком болезни и заражать других персонажей, просто он сам от болезни не страдает.">Естественный Иммунитет</td>
+                                <td class="karmZn"><lable id="pkv11">10</lable>/<lable id="pkv112" >4</lable></td>
+                                <td id="pkb11"><button class="onoff" onclick="onoff('pk11','pkv11',this)"><div>off</div></button>
+								<button class="onoff" onclick="onoff('pk11','pkv112',this)"><div>off</div></button></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onClick="closeKachBut('plusKachestva', 1, 'win')">закрыть</button>
+        </div>
+    </div>
+    <div id="win2" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Отрицательные качества добавляют карму">
+                <div>Отрицательные качества</div>
+            </h2>
+            <div class="content" id="contentPlusKach">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Качество
+                                </td>
+                                <td class="karmZn">
+                                    Карма
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="mk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
+                                <td id="mkv1" class="karmZn">4</td>
+                                <td id="mkb1"><button class="onoff" onclick="onoff('mk1','mkv1', this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="mk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>
+                                <td id="mkv2" class="karmZn">5</td>
+                                <td id="mkb2"><button class="onoff" onclick="onoff('mk2','mkv2',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
+Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>
+                                <td id="pkv3" class="karmZn">10</td>
+                                <td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>
+                                <td id="pkv4" class="karmZn">5</td>
+                                <td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость ergh</td>
+                                <td id="pkv5" class="karmZn">7</td>
+                                <td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onClick="closeKachBut('minusKachestva', 0, 'win2')">закрыть</button>
+        </div>
+    </div>
 </body>
+
 </html>
