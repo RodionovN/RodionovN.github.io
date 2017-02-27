@@ -174,7 +174,11 @@ button:hover, button:active, button:focus {
 	float:left;
   
 }
-#plusKachestva {
+#plusKachBut{
+  position:relative;
+  float:left;
+}
+.plusKachestva {
 	/* basics */
 	background-color: #444;
 	color: #C4BE92;
@@ -191,6 +195,7 @@ button:hover, button:active, button:focus {
 	float:left;
   
 }
+
 #minusKachestva{
 	/* basics */
 	background-color: #444;
@@ -205,7 +210,7 @@ button:hover, button:active, button:focus {
   	-webkit-box-shadow: 0px 0px 12px 0px #000;
     box-shadow: 0px 0px 12px 0px #000;
 	position:relative;
-	float:right;
+	float:left;
   
 }
 #Line{	
@@ -284,7 +289,7 @@ button:hover, button:active, button:focus {
 	margin-top: -200px;
 	overflow: auto;
 	z-index: 2000;
-	width: 500px;
+	width: 650px;
 	margin-left: -250px;
   	-webkit-box-shadow: 0px 0px 12px 0px #000;
     box-shadow: 0px 0px 12px 0px #000;
@@ -298,6 +303,18 @@ button:hover, button:active, button:focus {
 	cursor: pointer;
 }
 #win h3 {
+	text-align: center;
+	color: #555;
+}
+#win2 button {
+	float: right;
+	line-height: 20px;
+	margin: 1.2em;
+}
+#win2 button[type="button"]:hover {
+	cursor: pointer;
+}
+#win2 h3 {
 	text-align: center;
 	color: #555;
 }
@@ -356,5 +373,6 @@ button:hover, button:active, button:focus {
     text-shadow: black 1px 1px 0, black -1px -1px 0, 
                  black -1px 1px 0, black 1px -1px 0;
 } 
-#listKach{
+.karmZn{
+  text-align: center;
 }

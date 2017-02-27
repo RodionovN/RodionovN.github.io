@@ -40,10 +40,10 @@
 			 var countUmn;
 			 var countSpec;
 			 var predel = new Array();
-			 var plusKachestvaArr = new Array();			 
-			 var playerKachestvaArr = new Array();
+
+			 var plusKachestvaArr = new Array();
 			 var minusKachestvaArr = new Array();
-			 var playerKachestvaArr = new Array();
+			 
 
 				function racePred(){
 					var tRace = document.getElementById('race').value;
@@ -115,29 +115,33 @@
       opt.innerHTML = tempRace[i][1];
       document.getElementById('atr').appendChild(opt);
     }
-	for(var i = 1; i<tempAtributy.length; i++){
+    tempAtributy.splice(0,1);
+	for(var i = 0; i<tempAtributy.length; i++){
       var opt = document.createElement("option");      				
       opt.innerHTML = tempAtributy[i];
       document.getElementById('atribut').appendChild(opt);
     }
-	for(var i =2; i<tempMagic.length;i++){
+    tempMagic.splice(0,2);
+	for(var i =0; i<tempMagic.length;i++){
 		for(var j =0; j<tempMagic[i].length;j++){
 		  var opt = document.createElement("option");      				
 		  opt.innerHTML = tempMagic[i][j];
 		  document.getElementById('mag').appendChild(opt);
 		}
     }
-		document.getElementById('text1').innerHTML=tempMagicAtr[2][0];
-        document.getElementById('text2').innerHTML=tempMagicAtr[2][1];
-        document.getElementById('text3').innerHTML=tempMagicAtr[2][2];
-        document.getElementById('text4').innerHTML=tempMagicAtr[2][3];
-        document.getElementById('text5').innerHTML=tempMagicAtr[2][4]+'<br>';
-	for(var i = 3; i<tempSkils.length; i++){
+		document.getElementById('text1').innerHTML=tempMagicAtr[0][0];
+        document.getElementById('text2').innerHTML=tempMagicAtr[0][1];
+        document.getElementById('text3').innerHTML=tempMagicAtr[0][2];
+        document.getElementById('text4').innerHTML=tempMagicAtr[0][3];
+        document.getElementById('text5').innerHTML=tempMagicAtr[0][4]+'<br>';
+    tempSkils.splice(0,3);
+	for(var i = 0; i<tempSkils.length; i++){
       var opt = document.createElement("option");      				
       opt.innerHTML = tempSkils[i];
       document.getElementById('skils').appendChild(opt);
     }
-	for(var i = 4; i<tempNewYen.length; i++){
+    tempNewYen.splice(0,4);
+	for(var i = 0; i<tempNewYen.length; i++){
       var opt = document.createElement("option");      				
       opt.innerHTML = tempNewYen[i];
       document.getElementById('newyen').appendChild(opt);
@@ -685,31 +689,87 @@
 	
 }
 
-function closeKachBut(){
-	document.getElementById('win').style.display='none';
+
+function openKachBut(id){
+	document.getElementById(id).removeAttribute('style');
 }
-function openKachBut(){
-	document.getElementById('win').removeAttribute('style');
-}
-var buttonstate=0;
-function onoff(element)
+
+
+function onoff(idKach,id,element)
 {
-  buttonstate= 1 - buttonstate;
   var blabel, bstyle, bcolor;
-  if(buttonstate)
-  {
+  var a = document.getElementById(idKach).innerHTML
+  var idx = plusKachestvaArr.indexOf(a);
+  if(idKach[0]=='p'){
+    if(element.firstChild.innerHTML=="off")
+    {
+      blabel="on";
+      bstyle="green";
+      bcolor="lightgreen";
+
+        plusKachestvaArr.push(a);
+      
+      document.getElementById('countKach').innerHTML =  document.getElementById('countKach').innerHTML - document.getElementById(id).innerHTML;
+    }
+    else
+    {
+      blabel="off";
+      bstyle="lightgray";
+      bcolor="gray";
+
+      plusKachestvaArr.splice(idx, 1);
+      document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).innerHTML);
+    }
+  }
+  else{
+    if(element.firstChild.innerHTML=="off")
+    {
     blabel="on";
     bstyle="green";
     bcolor="lightgreen";
+    minusKachestvaArr.push(document.getElementById(idKach).innerHTML);
+    document.getElementById('countKach').innerHTML =  Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).innerHTML);
   }
   else
   {
     blabel="off";
     bstyle="lightgray";
     bcolor="gray";
+    minusKachestvaArr.splice(idx, 1);
+    document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - Number(document.getElementById(id).innerHTML);
+  }
   }
   var child=element.firstChild;
   child.style.background=bstyle;
   child.style.color=bcolor;
   child.innerHTML=blabel;
+}
+
+
+function closeKachBut(id, ind, win){
+  if (ind==1){
+  var el = document.getElementById(id);
+  if(el!=null){
+                    while(el.childNodes.length>0){        el.removeChild(el.childNodes[el.childNodes.length-1]);}
+}
+  for(var i = 0; i< plusKachestvaArr.length; i++){
+    var opt = document.createElement("dt");      				
+      opt.innerHTML = plusKachestvaArr[i];
+    document.getElementById(id).appendChild(opt);
+  
+}
+  }
+  else{
+      var el = document.getElementById(id);
+  if(el!=null){
+                    while(el.childNodes.length>0){        el.removeChild(el.childNodes[el.childNodes.length-1]);}
+}
+  for(var i = 0; i< minusKachestvaArr.length; i++){
+    var opt = document.createElement("dt");      				
+      opt.innerHTML = minusKachestvaArr[i]; 
+    document.getElementById(id).appendChild(opt);
+  
+}
+  }
+	document.getElementById(win).style.display='none';
 }

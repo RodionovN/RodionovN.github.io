@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+
 <html>
 <head>
 <title></title>
@@ -137,163 +137,150 @@
 		</div>
     </div>
 <div class="countUm">
-<lable><br>Карма:</lable>
-<lable id="countKach">25</lable>
+<lable title="Карма должна быть больше, либо равна нулю"><br>Карма:</lable>
+<lable id="countKach" title="Карма должна быть больше, либо равна нулю" >25</lable>
 </div>
-<div class="kachestva" id="plusKachestva">
-<dl>
-<button id="plusKachBut" onClick="openKachBut()" type="button">Положительные качества</button>
-<dt>Тег</dt>
-     <dd>Тег — это специальный символ разметки, который применяется для 
-         вставки различных элементов на веб-страницу таких как: рисунки, 
-         таблицы, ссылки и др., и для изменения их вида.</dd>		 
+<div class="plusKachestva">
+  <button id="plusKachBut" onClick="openKachBut('win')" type="button">Положительные качества</button> 
+<dl class="plusKachestva" id="plusKachestva">
+  <dt>Тут будут положительные качества.</dt>
 </dl>
 </div>	
-<div class="kachestva" id="minusKachestva">
-<dl>
-<dt>Тег</dt>
-     <dd>Тег — это специальный символ разметки, который применяется для 
-         вставки различных элементов на веб-страницу таких как: рисунки, 
-         таблицы, ссылки и др., и для изменения их вида.</dd>		 
+<div class="plusKachestva">
+  <button id="plusKachBut" onClick="openKachBut('win2')" type="button">Отрицательные качества</button> 
+<dl class="plusKachestva" id="minusKachestva">
+  <dt>Тут будут отрицательные качества.</dt>
 </dl>
-</div>	
+</div>
 <div id="win" style="display:none;">
    <div class="overlay"></div>
 		<div class="visible">
-			<h2 class="countUm"><div>Положительные качества</div></h2>
+			<h2 class="countUm" title="Положительные качества тратят карму"><div>Положительные качества</div></h2>
 				<div class="content" id="contentPlusKach">
 					<div>
 						<div class="table2">
 							<table border="0" width="100%" cellpadding="5">
+                <tr>
+							<td>
+                Качество
+                  </td>
+                  <td class="karmZn">
+                Карма
+                  </td>
+                  <td>                
+                  </td>
+                </tr>
 						   <tr>
-							<td id="pk1">Амбидекстр  (4)</td>
-							<td id="pkb1"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+							<td id="pk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
+                 <td id="pkv1" class="karmZn">4</td>
+							<td id="pkb1" ><button class="onoff" onclick="onoff('pk1','pkv1', this)"><div>off</div></button></td>
 						  </tr>
 						   <tr>
-							<td id="pk2">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+							<td id="pk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>                 
+                 <td id="pkv2" class="karmZn">5</td>
+							<td id="pkb2" ><button class="onoff" onclick="onoff('pk2','pkv2',this)"><div>off</div></button></td>
 						  </tr>
 						   <tr>
-							<td id="pk3">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+							<td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
+Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>                 
+                 <td id="pkv3" class="karmZn">10</td>
+							<td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
 						  </tr>
 						   <tr>
-							<td id="pk4">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+							<td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>                 
+                 <td id="pkv4" class="karmZn">5</td>
+							<td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
 						  </tr>
 						   <tr>
-							<td id="pk5">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+							<td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость к духам</td>                 
+                 <td id="pkv5" class="karmZn">7</td>
+							<td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
 						  </tr>
-						   <tr>
-							<td id="pk6">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+                <tr>
+							<td id="pk6" title="Персонаж с этим качеством получает бонус +2 к набору кубиков при всех проверках Лечения направленных на него, а так же магическом лечении.">Быстрое исцеление</td>                 
+                 <td id="pkv6" class="karmZn">3</td>
+							<td id="pkb6"><button class="onoff" onclick="onoff('pk6','pkv6',this)"><div>off</div></button></td>
 						  </tr>
-						   <tr>
-							<td id="pk7">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+                <tr>
+							<td id="pk7" title="За каждую единицу рейтинга качества персонаж получает одну доп.клетку Блока Переполнения Повреждений. Позволяют персонажу вынести больше повреждений перед смертью. Не поднимают порог перед впадением в беспамятство, не влияют на получаемые персонажем модификаторы повреждений.">Воля к жизни</td>                 
+                 <td id="pkv7" class="karmZn">3</td>
+                  <td id="pkb7"><button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
+                  <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
+                  <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button></td>
 						  </tr>
-						   <tr>
-							<td id="pk8">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+                <tr>
+							<td id="pk8" title="За каждую единицу рейтинга качества при расчете модификаторов ран персонаж игнорирует одну клетку повреждений. Не может быть использовано адептом с силой Сопротивление боли или биовером компенсатор повреждений.">Высокая болевая устойчивость</td>                 
+                 <td id="pkv8" class="karmZn">7</td>
+                  <td id="pkb8"><button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
+                  <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
+                  <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button></td>
 						  </tr>
-						   <tr>
-							<td id="pk9">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
+                <tr>
+							<td id="pk9" title="Персонаж с этим качеством имеет поразительно гибкие суставы. Персонаж получает бонус +2 к набору кубиков при проверке исскуства побега, может протиснуться в тесные и маленькие пространства, имеет успех в барах и на вечеринках.">Гуттаперчивый</td>                 
+                 <td id="pkv9" class="karmZn">6</td>
+                  <td id="pkb9"><button class="onoff" onclick="onoff('pk9','pkv9',this)"><div>off</div></button>
+                  <button class="onoff" onclick="onoff('pk9','pkv9',this)"><div>off</div></button></td>
 						  </tr>
-						   <tr>
-							<td id="pk10">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk11">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk12">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk13">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk14">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk15">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk16">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk17">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk18">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk19">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk20">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk21">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk22">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk23">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk24">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk25">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk26">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk27">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk28">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk29">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk30">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>
-						   <tr>
-							<td id="pk31">Модальное окно фиксированной ширины</td>
-							<td id="text2"><button class="onoff" onclick="onoff(this)"><div>off</div></button></td>
-						  </tr>						  
+                
+						   					  
 						</table>
 						</div>
 					</div>
 				</div>			
-			<button type="button" onClick="closeKachBut()">закрыть</button>
+			<button type="button" onClick="closeKachBut('plusKachestva', 1, 'win')">закрыть</button>
+		</div>
+</div>
+<div id="win2" style="display:none;">
+   <div class="overlay"></div>
+		<div class="visible">
+			<h2 class="countUm" title="Отрицательные качества добавляют карму"><div>Отрицательные качества</div></h2>
+				<div class="content" id="contentPlusKach">
+					<div>
+						<div class="table2">
+							<table border="0" width="100%" cellpadding="5">
+                <tr>
+							<td>
+                Качество
+                  </td>
+                  <td class="karmZn">
+                Карма
+                  </td>
+                  <td>                
+                  </td>
+                </tr>
+						   <tr>
+							<td id="mk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
+                 <td id="mkv1" class="karmZn">4</td>
+							<td id="mkb1" ><button class="onoff" onclick="onoff('mk1','mkv1', this)"><div>off</div></button></td>
+						  </tr>
+						   <tr>
+							<td id="mk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>                 
+                 <td id="mkv2" class="karmZn">5</td>
+							<td id="mkb2" ><button class="onoff" onclick="onoff('mk2','mkv2',this)"><div>off</div></button></td>
+						  </tr>
+						   <tr>
+							<td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
+Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>                 
+                 <td id="pkv3" class="karmZn">10</td>
+							<td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
+						  </tr>
+						   <tr>
+							<td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>                 
+                 <td id="pkv4" class="karmZn">5</td>
+							<td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
+						  </tr>
+						   <tr>
+							<td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость ergh</td>                 
+                 <td id="pkv5" class="karmZn">7</td>
+							<td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
+						  </tr>		   
+                
+						   					  
+						</table>
+						</div>
+					</div>
+				</div>			
+			<button type="button" onClick="closeKachBut('minusKachestva', 0, 'win2')">закрыть</button>
 		</div>
 </div>
 </body>
