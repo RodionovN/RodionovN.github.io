@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -177,175 +177,197 @@
                             </tr>
                             <tr>
                                 <td id="pk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
-                                <td id="pkv1" class="karmZn">4</td>
+                              <td><input id="pkv1" class="karmZn" value="4" disabled></td>
                                 <td id="pkb1"><button class="onoff" onclick="onoff('pk1','pkv1', this)"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>
-                                <td id="pkv2" class="karmZn">5</td>
+                                <td><input id="pkv2" class="karmZn" value="5"></td>
                                 <td id="pkb2"><button class="onoff" onclick="onoff('pk2','pkv2',this)"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
 Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>
-                                <td id="pkv3" class="karmZn">10</td>
+                                <td><input id="pkv3" class="karmZn" value="10"></td>
                                 <td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this)"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>
-                                <td id="pkv4" class="karmZn">5</td>
+                                <td><input id="pkv4" class="karmZn" value="5"></td>
                                 <td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this)"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость к духам</td>
-                                <td id="pkv5" class="karmZn">7</td>
+                                <td><input id="pkv5" class="karmZn" value="7"></td>
                                 <td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this)"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk6" title="Персонаж с этим качеством получает бонус +2 к набору кубиков при всех проверках Лечения направленных на него, а так же магическом лечении.">Быстрое исцеление</td>
-                                <td id="pkv6" class="karmZn">3</td>
+                                <td><input id="pkv6" class="karmZn" value="3"></td>
                                 <td id="pkb6"><button class="onoff" onclick="onoff('pk6','pkv6',this)"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk7" title="За каждую единицу рейтинга качества персонаж получает одну доп.клетку Блока Переполнения Повреждений. Позволяют персонажу вынести больше повреждений перед смертью. Не поднимают порог перед впадением в беспамятство, не влияют на получаемые персонажем модификаторы повреждений.">Воля к жизни</td>
-                                <td id="pkv7" class="karmZn">3</td>
-                                <td id="pkb7"><button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
-                                    <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button>
-                                    <button class="onoff" onclick="onoff('pk7','pkv7',this)"><div>off</div></button></td>
+                              <td><input id="pkv7" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(3):</td><td width="20%"><div><input id="pkv71" class="karmZn" value="3" type="radio" name="chGroup1" checked></div></td></tr>
+                              <tr><td>Рейтинг 2(6):</td><td><input id="pkv72" class="karmZn" value="6" type="radio" name="chGroup1"></td></tr>
+                              <tr><td>Рейтинг 3(9):</td><td><input id="pkv73" class="karmZn" value="9" type="radio" name="chGroup1"></td></tr></table>
+                                      </td>
+                                    
+                                <td id="pkb7"><button class="onoff" onclick="radiobutCheck('pk7','pkv7',this,'chGroup1')"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk8" title="За каждую единицу рейтинга качества при расчете модификаторов ран персонаж игнорирует одну клетку повреждений. Не может быть использовано адептом с силой Сопротивление боли или биовером компенсатор повреждений.">Высокая болевая устойчивость</td>
-                                <td id="pkv8" class="karmZn">7</td>
-                                <td id="pkb8"><button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
-                                    <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button>
-                                    <button class="onoff" onclick="onoff('pk8','pkv8',this)"><div>off</div></button></td>
+                              <td><input id="pkv8" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(7):</td><td width="20%"><input id="pkv81" class="karmZn" value="7" type="radio" name="chGroup2" checked></td></tr>
+                              <tr><td>Рейтинг 2(14):</td><td><input id="pkv82" class="karmZn" value="14" type="radio" name="chGroup2"></td></tr>
+                              <tr><td>Рейтинг 3(21):</td><td><input id="pkv83" class="karmZn" value="21" type="radio" name="chGroup2"></td></tr></table>
+                                      </td>
+                                 <td id="pkb8"><button class="onoff" onclick="radiobutCheck('pk8','pkv8',this,'chGroup2')"><div>off</div></button></td>
                             </tr>
                             <tr>
                                 <td id="pk9" title="Персонаж с этим качеством имеет поразительно гибкие суставы. Персонаж получает бонус +2 к набору кубиков при проверке исскуства побега, может протиснуться в тесные и маленькие пространства, имеет успех в барах и на вечеринках.">Гуттаперчивый</td>
-                                <td id="pkv9" class="karmZn">6</td>
+                                <td><input id="pkv9" class="karmZn" value="6"></td>
                                 <td id="pkb9"><button class="onoff" onclick="onoff('pk9','pkv9',this)"><div>off</div></button>
                                 </td>
                             </tr>
                             <tr>
                                 <td id="pk10" title="Наставник означает, что персонаж связан с духомпокровителем наставляющим его в магических практиках и обеспечивающим определёнными преимуществами и неудобствами. Персонаж может сменить духа-наставника, но одномоментно у него может быть не более одного духа-наставника. Для смены духа-наставника персонаж сначала должен купить это качество, как если бы оно было Отрицательным. Затем он может приобрести это качество снова, с другим духом-наставником. Цена качества представляет собой пошлину за развод с одним духом и заключение союза с другим. Это качество доступно только персонажам имеющим рейтинг атрибута Магия.">Дух-Наставник</td>
-                                <td id="pkv10" class="karmZn">5</td>
+                                <td><input id="pkv10" class="karmZn" value="5"></td>
                                 <td id="pkb10"><button class="onoff" onclick="onoff('pk10','pkv10',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk11" title="Персонаж с Естественным Иммунитетом имеет врождённый и выработанный иммунитет к одной болезни или токсину. Это качество доступно в двух вариантах. Вариант за 4 очка Кармы даёт иммунитет к одному природному токсину или болезни. Если же приобретается вариант за 10 очков, иммунитет действует против одного синтетического (искусственно созданного) токсина или болезни. Естественный Иммунитет не работает против заболеваний и токсинов имеющих магическую природу, таких как ВВЧМЧ. Игрок и МИ должны решить, к какой болезни, наркотику или яду у персонажа иммунитет. В течении шести часов персонаж может принять одну дозу препарата или яда без получения каких либо негативных эффектов. Любая последующая доза или воздействие наносит обычный урон, но время восстановления персонажа уменьшается вдвое. Обратите внимание, персонаж имеющий Естественный Иммунитет может служить переносчиком болезни и заражать других персонажей, просто он сам от болезни не страдает.">Естественный Иммунитет</td>
-                                <td class="karmZn"><lable id="pkv11">10</lable>/<lable id="pkv112" >4</lable></td>
-                                <td id="pkb11"><button class="onoff" onclick="onoff('pk11','pkv112',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk11','pkv11',this)"><div>off</div></button></td>
+                                <td><input id="pkv11" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Природный(4):</td><td width="20%"><input id="pkv111" class="karmZn" value="4" type="radio" name="chGroup3" checked></td></tr>
+                              <tr><td>Синтетический(10):</td><td><input id="pkv112" class="karmZn" value="10" type="radio" name="chGroup3"></td></tr></table>
+                                      </td>
+                                 <td id="pkb11"><button class="onoff" onclick="radiobutCheck('pk11','pkv11',this,'chGroup3')"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk12" title="Исключительный Атрибут поможет создать харизматического тролля или проворного гнома. Это качество позволяет поднять один атрибут на единицу выше максимума для метатипа. Например, персонаж-орк с Исключительным Атрибутом для Силы может поднять до её 10 (перед применением аугментаций) вместо нормального лимита в 9. Исключительный Атрибут можно применить к Специальному атрибуту, т.е. Магии или Резонансу. Грань нельзя увеличить Исключительным Атрибутом (она усиливается другим качеством — Счастливчик). Персонаж может взять Исключительный Атрибут только один раз и только с согласия МИ.">Исключительный Атрибут</td>
-                                <td id="pkv12" class="karmZn">14</td>
+                                <td><input id="pkv12" class="karmZn" value="14"></td>
                                 <td id="pkb12"><button class="onoff" onclick="onoff('pk12','pkv12',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk13" title="Нули и единицы — родной язык Кодсингера. Персонаж весьма опытен в совершении одного действия в Матрице (выбираемого в момент получения этого качества) и получает +2 кубика к набору кубиков при его проверке. Это качество может быть выбрано только для Матричного действия (см. стр. 256) и использоваться в связанной с ними проверке.">Кодсингер</td>
-                                <td id="pkv13" class="karmZn">10</td>
+                                <td><input id="pkv13" class="karmZn" value="10"></td>
                                 <td id="pkb13"><button class="onoff" onclick="onoff('pk13','pkv13',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk14" title="Персонаж с качеством Котоподобный одарён поразительной элегантностью, тихой походкой и почти сверхъестественной способностью двигаться беззвучно. Также он утверждает что всегда приземляется на ноги, но проверять не даёт. Это качество добавляет +2 кубика к броскам на проверки умения Скрытность.">Котоподобный</td>
-                                <td id="pkv14" class="karmZn">7</td>
+                                <td><input id="pkv14" class="karmZn" value="7"></td>
                                 <td id="pkb14"><button class="onoff" onclick="onoff('pk14','pkv14',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk15" title="Эта замечательная особенность потенциально способна отправить Огнешар отправителю. За каждые 6 очков Кармы персонаж получает 1 дополнительный кубик для проверок Сопротивления Заклинанию. Однако, Магическое Сопротивление всегда включено, вы не можете снизить его при получении полезных заклинаний, таких как Исцеление. Также персонаж с этим качеством не может принимать участие в заклинаниях, требующих добровольного согласия, такие заклинания на таком персонаже автоматически не удаются. Персонаж с рейтингом Магии не может получить это качество.">Магическое Сопротивление</td>
-                                <td id="pkv15" class="karmZn">6</td>
-                                <td id="pkb15"><button class="onoff" onclick="onoff('pk15','pkv15',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk15','pkv15',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk15','pkv15',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk15','pkv15',this)"><div>off</div></button></td>
+                                <td><input id="pkv15" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(6):</td><td width="20%"><input id="pkv151" class="karmZn" value="6" type="radio" name="magSopr" checked></td></tr>
+                              <tr><td>Рейтинг 2(12):</td><td><input id="pkv152" class="karmZn" value="12" type="radio" name="magSopr"></td></tr>
+                              <tr><td>Рейтинг 3(18):</td><td><input id="pkv153" class="karmZn" value="18" type="radio" name="magSopr"></td></tr>
+                              <tr><td>Рейтинг 4(24):</td><td><input id="pkv153" class="karmZn" value="24" type="radio" name="magSopr"></td></tr></table>
+                                      </td>
+                                 <td id="pkb15"><button class="onoff" onclick="radiobutCheck('pk15','pkv15',this,'magSopr')"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk16" title="Это качество даёт персонажу интуитивное понимание внутреннего устройства и основных принципов работы механических и электронных устройств. Он знает как починить сломанное, повысить эффективность устройства или использовать его совсем не по назначению. Персонажи с качеством На Скорую Руку получают бонус +2 к набору кубиков проверки Механики при разгоне снаряжения. Если МИ решает, что желаемое персонажем действие в принципе возможно, он устанавливает порог используя таблицу Создания/ Ремонта (стр. 153), но снижает его на 1. И хотя успешный разгон снаряжения позволяет персонажу совершать удивительные технические трюки, все они носят временный характер.">На скорую руку</td>
-                                <td id="pkv16" class="karmZn">10</td>
+                                <td><input id="pkv16" class="karmZn" value="10"></td>
                                 <td id="pkb16"><button class="onoff" onclick="onoff('pk16','pkv16',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk17" title="Возможности тела и разума ограничены, но воля некоторых столь сильна, что раздвигает эти рамки. За каждый рейтинг Непреклонного персонаж увеличивает один из своих врождённых пределов (Ментальный, Физический или Социальный) по своему выбору на +1. Каждый из трёх возможных рейтингов можно применить к любому пределу по выбору игрока (например, +3 к одному пределу, +2 к одному и +1 к другому, либо по +1 к каждому).">Непреклонный</td>
-                                <td id="pkv17" class="karmZn">8</td>
-                                <td id="pkb17"><button class="onoff" onclick="onoff('pk17','pkv17',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk17','pkv17',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk17','pkv17',this)"><div>off</div></button></td>
+                                <td><input id="pkv17" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(8):</td><td width="20%"><input id="pkv171" class="karmZn" value="8" type="radio" name="nepreklonniy" checked></td></tr>
+                              <tr><td>Рейтинг 2(16):</td><td><input id="pkv172" class="karmZn" value="16" type="radio" name="nepreklonniy"></td></tr>
+                              <tr><td>Рейтинг 3(24):</td><td><input id="pkv173" class="karmZn" value="24" type="radio" name="nepreklonniy"></td></tr></table>
+                                      </td>
+                                 <td id="pkb17"><button class="onoff" onclick="radiobutCheck('pk17','pkv17',this,'nepreklonniy')"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk18" title="Этот персонаж смешивается с толпой, его редко замечают и быстрозабывают. Внешность его непримечательна решительно во всех аспектах. Любой пытающийся описать этого персонажа лишь выдавит из себя «обычный рост, обычное телосложение, обычные волосы и т.д.». Для тех кто пытается вспомнить детали внешности персонажа увеличьте порог на 1. Это приводит к тому, что Средняя проверка Памяти (порог 2) становиться Трудной (порог 3). Любой кто попытается обнаружить или выследить персонажа с качеством Непримечательность в населённой местности получает штраф -2 к набору кубиков на всех проверках поиска. Такой же штраф полагается при попытках спрашивать о персонаже зная только его внешность. Этот модификатор, однако, не применяется к поискам магией или в Матрице. Если персонаж каким либо видимым образом получает татуировки, шрамы, очевидный кибервэр или другие приметы, преимущества Непримечательности теряются до тех пор, пока приметы не будут удалены.">Неприметность</td>
-                                <td id="pkv18" class="karmZn">8</td>
+                                <td><input id="pkv18" class="karmZn" value="8"></td>
                                 <td id="pkb18"><button class="onoff" onclick="onoff('pk18','pkv18',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk19" title="Это качество поможет вам стать лучше, чем лучший в мире. Обычно лимитом умения является 12. Но иногда появляется персонаж, выходящий за эти ограничения и проявляющий исключительное мастерство в конкретном умении. С этим качеством одно умение персонажа может быть поднято до 7 при создании персонажа, а в конечном итоге можно поднять его до рейтинга 13. Персонаж может взять качество Одарённый только один раз.">Одарённый</td>
-                                <td id="pkv19" class="karmZn">14</td>
+                                <td><input id="pkv19" class="karmZn" value="14"></td>
                                 <td id="pkb19"><button class="onoff" onclick="onoff('pk19','pkv19',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk20" title="Когда на вызов является дух-жук с мокрыми мандибулами, персонаж с качеством Отважный скорее всего останется стоять и сражаться, а не бежать, сверкая пятками. Это качество даёт персонажу бонус +2 к набору кубиков при сопротивлении страху и запугиванию, в том числе стражу вызванному магией или силами тварей.">Отважный</td>
-                                <td id="pkv20" class="karmZn">10</td>
+                                <td><input id="pkv20" class="karmZn" value="10"></td>
                                 <td id="pkb20"><button class="onoff" onclick="onoff('pk20','pkv20',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk21" title="Это качество позволяет персонажу с лёгкостью осваиваться в новых условиях, ситуациях, организациях и заданиях. Проникновение в банду, установление контактов в новом городе или получение приглашения на частную вечеринку, персонаж во всех подобных ситуациях получает временный бонус +2 к набору кубиков для соответствующих социальных проверок Переговоров и Обмана при первой встрече. Этот модификатор не распространяется на вторую и последующие встречи.">Первое Впечатление</td>
-                                <td id="pkv21" class="karmZn">11</td>
+                                <td><input id="pkv21" class="karmZn" value="11"></td>
                                 <td id="pkb21"><button class="onoff" onclick="onoff('pk21','pkv21',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk22" title="Имеющий это качество персонаж-метачеловек может сойти за человека в большинстве случаев. При проведении проверок Социальных умений (см. стр. 143) НИПы-люди будут относиться к такому человеку нейтрально, даже те, кто не любит металюдей. Персонаж может ощущать враждебность со стороны тех НИПметалюдей, которые предвзято относятся к людям и приняли его за человека или не доверяют тем, кто выдаёт себя за человека. Качество Похожий на Человека могут взять только эльфы, гномы и орки.">Похожий на Человека</td>
-                                <td id="pkv22" class="karmZn">6</td>
+                                <td><input id="pkv22" class="karmZn" value="6"></td>
                                 <td id="pkb22"><button class="onoff" onclick="onoff('pk22','pkv22',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk23" title="Это качество делает нейроструктуру персонажа более стойкой к отдаче. Это даёт ему 1 очко природной фильтрации биоотдачи, которая складывается с программой Фильтр Биоотдачи или Брандмауэром техноманта (см. стр. 247).">Природная Закалка</td>
-                                <td id="pkv23" class="karmZn">10</td>
+                                <td><input id="pkv23" class="karmZn" value="10"></td>
                                 <td id="pkb23"><button class="onoff" onclick="onoff('pk23','pkv23',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk24" title="Персонаж с этим качеством обладает врождённым сочетанием физической формы, пространственного воображения и природными способностями к гимнастике или атлетике. Хотя персонаж может и не быть спортсменом мирового класса, а для максимальной эффективности его таланты могут потребовать огранки, для своего веса и размера он в отличной физической форме. Прирождённый Атлет даёт бонус +2 к набору кубиков при проверках умений Бег и Гимнастика.">Прирождённый Атлет</td>
-                                <td id="pkv24" class="karmZn">7</td>
+                                <td><input id="pkv24" class="karmZn" value="7"></td>
                                 <td id="pkb24"><button class="onoff" onclick="onoff('pk24','pkv24',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk25" title="Когда приходит время жать на газ и двигать, вам нужен Резкий Водила. Он прирождённый водитель или пилот. Когда он сидит за баранкой/штурвалом/джойстиком он возможностей, а потому способен выжать из них всё. Во время поездки или погони Резкий Водила может увеличить Скорость своей машины на 20% или модификатор Управляемости на +1 (по выбору игрока). Также он получает бонус +2 к набору кубиков при совершении сложных манёвров или трюков при управлении машиной. Этот бонус длится 1к6 минут.Игрок может, если захочет, продлить этот бонус на дополнительные 1к6 минут. Это подвергает машину или дрон перегрузкам далеко за пределами проектных, и чревато катастрофическими повреждениями. За каждую минуту воздействия на машину бонуса в прошлом периоде активации, машина автоматически получает одну единицу стрессового урона (без возможности его отмены).">Резкий Водила</td>
-                                <td id="pkv25" class="karmZn">11</td>
+                                <td><input id="pkv25" class="karmZn" value="11"></td>
                                 <td id="pkb25"><button class="onoff" onclick="onoff('pk25','pkv25',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk26" title="Если персонаж знает окрестности — кратчайшие пути, укрытия и надёжных людей - лучше чем кто-либо другой, то скорее всего у него есть качество Родная Земля. Он знает живущие здесь семьи, их историю и чем заняты переехавшие отсюда дети, он знает улицы лучше чем ГридГайд, знает то, что никогда не будет в базе ГридГайд и случаи, когда ГридГайд неправ. Он знает политику банд, кто на кого и против кого работает. Но его познания могут относиться не только к физическим улицам. В зависимости от персонажа его Родная Земля может проявляться в различных формах.">Родная Земля</td>
-                                <td id="pkv26" class="karmZn">10</td>
+                                <td><input id="pkv26" class="karmZn" value="10"></td>
                                 <td id="pkb26"><button class="onoff" onclick="onoff('pk26','pkv26',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk27" title="Техноманты и пользователи магии имеющие качество Сосредоточенная Концентрация управляют своими дисциплинами куда точнее чем остальные. Эта точность снижает нагрузку на тело техноманта или пользователя магии. Он способен поддерживать одно заклинание/комплексную форму с силой/уровнем его рейтинга Сосредоточенной Концентрации без получения штрафа. Например, пользователь магии с Сосредоточенной Концентрацией рейтинга 3 может поддержать заклинание Броня Мощью 3 не получая никаких негативных модификаторов к набору кубиков при поддержании заклинания. Поддержание любого дополнительного заклинания или комплексной формы накладывает обычный штраф -2 к набору кубиков на поддержание за каждое поддерживаемое заклинание или комплексную форму. Это качество может быть взято только творящими заклинания пользователями магии или техномантами.">Сосредоточенная Концентрация</td>
-                                <td id="pkv27" class="karmZn">4</td>
-                                <td id="pkb27"><button class="onoff" onclick="onoff('pk27','pkv27',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk27','pkv27',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk27','pkv27',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk27','pkv27',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk27','pkv27',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk27','pkv27',this)"><div>off</div></button></td>
+                                <td><input id="pkv27" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(4):</td><td width="20%"><input id="pkv271" class="karmZn" value="4" type="radio" name="sosredotoch" checked></td></tr>
+                              <tr><td>Рейтинг 2(8):</td><td><input id="pkv272" class="karmZn" value="8" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 3(12):</td><td><input id="pkv273" class="karmZn" value="12" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 4(16):</td><td><input id="pkv274" class="karmZn" value="16" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 5(20):</td><td><input id="pkv275" class="karmZn" value="20" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 6(24):</td><td><input id="pkv276" class="karmZn" value="24" type="radio" name="sosredotoch"></td></tr></table>
+                                      </td>
+                                 <td id="pkb27"><button class="onoff" onclick="radiobutCheck('pk27','pkv27',this,'sosredotoch')"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk28" title="Обладающие этим качеством персонажи легче остальных переносят повреждения. Персонаж получает +1 к набору кубиков Тела при проверках Сопротивление Повреждениям.">Стойкость</td>
-                                <td id="pkv28" class="karmZn">9</td>
+                                <td><input id="pkv28" class="karmZn" value="9"></td>
                                 <td id="pkb28"><button class="onoff" onclick="onoff('pk28','pkv28',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk29" title="Броски костей и монет чаще всего играют за персонажа, заставляя челюсти окружающих падать от изумления. Качество Счастливчик позволяет персонажу поднять значение атрибута Грань на единицу выше максимального для его метатипа (например, персонажчеловек может поднять Грань до 8). Обратите внимание, получение этого качества не поднимает фактическоезначение Грани, на это нужно дополнительно  потратить Карму. Это качество может быть получено только один раз и только после одобрения МИ. Качество Счастливчик не комбинируется с Исключительным Атрибутом.">Счастливчик</td>
-                                <td id="pkv29" class="karmZn">12</td>
+                                <td><input id="pkv29" class="karmZn" value="12"></td>
                                 <td id="pkb29"><button class="onoff" onclick="onoff('pk29','pkv29',this)"><div>off</div></button></td>
                             </tr>
 							<tr>
                                  <td id="pk30" title="Персонаж с этим качеством легче справляется с болезнями и токсинами чем другие персонажи и получает бонус +1 к набору кубиков при проверках Сопротивления. Это качество бывает двух уровней: за 4 очка Кармы персонаж устойчив или только к токсинам или только к патогенам. Если же персонаж потратил на это качество 8 очков, он получает бонус +1 к противодействию обоим.">Устойчивость к патогенам/токсинам</td>
-                                <td class="karmZn"><lable id="pkv30">8</lable>/<lable id="pkv302" >4</lable></td>
-                                <td id="pkb30"><button class="onoff" onclick="onoff('pk30','pkv302',this)"><div>off</div></button>
-								<button class="onoff" onclick="onoff('pk30','pkv30',this)"><div>off</div></button></td>
+                                <td><div class="karmZn"><input id="pkv30" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Патоген(4):</td><td width="20%"><input id="pkv301" class="karmZn" value="4" type="radio" name="ustoichPT" checked></td></tr>
+                              <tr><td>Токсин(8):</td><td><input id="pkv302" class="karmZn" value="8" type="radio" name="ustoichPT"></td></tr></table>
+                                      </td>
+                                 <td id="pkb30"><button class="onoff" onclick="radiobutCheck('pk30','pkv30',this,'chGroup3')"><div>off</div></button></td>
                             </tr>
 							<tr>
                                 <td id="pk31" title="Персонаж с этим качеством может мгновенно вспоминать факты, даты, цифры и всё прочее что он когда либо видел или слышал. Персонаж получает бонус +2 к набору кубиков при всех проверках Памяти.">Фотографическая память</td>
-                                <td id="pkv31" class="karmZn">6</td>
+                                <td><input id="pkv31" class="karmZn" value="6"></td>
                                 <td id="pkb31"><button class="onoff" onclick="onoff('pk31','pkv31',this)"><div>off</div></button></td>
                             </tr>
                         </table>

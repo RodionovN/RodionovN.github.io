@@ -730,15 +730,14 @@
                          bcolor = "lightgreen";
 
                          plusKachestvaArr.push(a);
-
-                         document.getElementById('countKach').innerHTML = document.getElementById('countKach').innerHTML - document.getElementById(id).innerHTML;
+                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - document.getElementById(id).value;
                      } else {
                          blabel = "off";
                          bstyle = "lightgray";
                          bcolor = "gray";
 
                          plusKachestvaArr.splice(idx, 1);
-                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).innerHTML);
+                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).value);
                      }
                  } else {
                      if (element.firstChild.innerHTML == "off") {
@@ -792,3 +791,40 @@
                  }
                  document.getElementById(win).style.display = 'none';
              }
+
+
+function radiobutCheck(idKach, id, element, group){
+  
+  var gr1 = document.getElementsByName(group);
+  var zn=document.getElementById(id).value;
+document.getElementById(id).value=gr1[0].value;
+  if(element.firstChild.innerHTML == "off"){
+    for(var i = 0; i < gr1.length; i++) {
+      if(gr1[i].checked == true) {
+        zn = gr1[i].value;    
+      }    
+    }
+  }
+  document.getElementById(id).value=zn;
+    onoff(idKach, id, element);
+ }
+
+
+function checkBoxCheck(idKach, id, element, group){
+  
+  var gr1 = document.getElementsByName(group);
+  var summ = 0;
+  document.getElementById(id).value=0;
+for(var i = 0; i < gr1.length; i++) {
+   if((gr1[i].checked == true)) {
+     summ+= Number(gr1[i].value);
+   }
+  }
+    
+    document.getElementById(id).value+=Number(summ);
+  
+    onoff(idKach, id, element);
+  
+ 
+  
+}

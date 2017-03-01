@@ -375,8 +375,15 @@ button:hover, button:active, button:focus {
 } 
 .karmZn{
   text-align: center;
+  color: #C4BE92;   
+	font-size: 18px; 
 }
 
 #table2{
 	color: #C4BE92;
+}
+.karmZn input{
+  align: center;
+  color: #C4BE92;   
+	font-size: 18px; 
 }
