@@ -826,7 +826,7 @@ for(var i = 0; i < gr1.length; i++) {
     onoff(idKach, id, element); 
 }
 
-function radiobutCheck2(idKach, id, element, group1, group2){  //'mk1','mkv1',this,'allergiya1','allergiya2'
+function radioCheck2(idKach, id, element, group1, group2){  //'mk1','mkv1',this,'allergiya1','allergiya2'
 	 
   var gr1 = document.getElementsByName(group1);
   var gr2 = document.getElementsByName(group2);
