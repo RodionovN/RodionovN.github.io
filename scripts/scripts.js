@@ -730,7 +730,7 @@
                          bcolor = "lightgreen";
 
                          plusKachestvaArr.push(a);
-                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - document.getElementById(id).value;
+                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - Number(document.getElementById(id).value);
                      } else {
                          blabel = "off";
                          bstyle = "lightgray";
@@ -740,18 +740,19 @@
                          document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).value);
                      }
                  } else {
+					 
                      if (element.firstChild.innerHTML == "off") {
                          blabel = "on";
                          bstyle = "green";
                          bcolor = "lightgreen";
-                         minusKachestvaArr.push(document.getElementById(idKach).innerHTML);
-                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).innerHTML);
+                         minusKachestvaArr.push(a);
+                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).value);
                      } else {
                          blabel = "off";
                          bstyle = "lightgray";
                          bcolor = "gray";
                          minusKachestvaArr.splice(idx, 1);
-                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - Number(document.getElementById(id).innerHTML);
+                         document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - Number(document.getElementById(id).value);
                      }
                  }
                  var child = element.firstChild;
@@ -821,10 +822,32 @@ for(var i = 0; i < gr1.length; i++) {
    }
   }
     
-    document.getElementById(id).value+=Number(summ);
-  
+    document.getElementById(id).value+=Number(summ);  
+    onoff(idKach, id, element); 
+}
+
+function radiobutCheck2(idKach, id, element, group1, group2){  //'mk1','mkv1',this,'allergiya1','allergiya2'
+	 
+  var gr1 = document.getElementsByName(group1);
+  var gr2 = document.getElementsByName(group2);
+  var zn = Number(document.getElementById(id).value);
+  var z;
+  var z2;
+document.getElementById(id).value=gr1[0].value+gr2[0].value;
+  if(element.firstChild.innerHTML == "off"){
+		for(var i = 0; i < gr1.length; i++) {
+		  if(gr1[i].checked == true) {
+			z = gr1[i].value;
+		  }    
+		}
+		for(var y = 0; y < gr2.length; y++) {
+			if(gr2[y].checked == true) {
+				z2 = Number(gr2[y].value);				
+			}
+		}
+	zn=Number(z)+Number(z2);		
+	}
+		
+  document.getElementById(id).value=zn;
     onoff(idKach, id, element);
-  
- 
-  
 }
