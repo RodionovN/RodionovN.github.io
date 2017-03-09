@@ -318,6 +318,30 @@ button:hover, button:active, button:focus {
 	text-align: center;
 	color: #555;
 }
+#win3 button {
+	float: right;
+	line-height: 20px;
+	margin: 1.2em;
+}
+#win3 button[type="button"]:hover {
+	cursor: pointer;
+}
+#win3 h3 {
+	text-align: center;
+	color: #555;
+}
+#win4 button {
+	float: right;
+	line-height: 20px;
+	margin: 1.2em;
+}
+#win4 button[type="button"]:hover {
+	cursor: pointer;
+}
+#win4 h3 {
+	text-align: center;
+	color: #555;
+}
 .content {
 	background-color: #444;
 	
