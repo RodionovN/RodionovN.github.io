@@ -46,12 +46,18 @@
              var minRang = new Array();
              var plusKachestvaArr = new Array(plusArr, plRang);
              var minusKachestvaArr = new Array(minusArr, minRang);
-			 var Skils = new Array();
+			      var Skils = new Array();
              var SkilsRang = new Array();
-			 var groupSkils = new Array();
+			      var groupSkils = new Array();
              var groupSkilsRang = new Array();
              var SkilsArr = new Array(Skils, SkilsRang);
              var groupSkilsArr = new Array(groupSkils, groupSkilsRang);
+              var language = Array();
+              var languageRang = Array();
+              var knowledge = Array();
+              var knowledgeRang = Array();
+              var languageArr=Array(language, languageRang);
+              var knowledgeArr = Array(knowledge, knowledgeRang);
 
 
              function racePred() {
@@ -158,6 +164,7 @@
 
                  racePred();
                  countUmen();
+               knowledgeCount();
              }
 
              function countUmen() {
@@ -269,16 +276,7 @@
                  }
              }
 
-             function getIdMagic() {
-                 for (var i = 0; i < tempMagic.length; i++) {
-                     for (var j = 0; j < tempMagic[i].length; j++) {
-                         if (document.getElementById('mag')[document.getElementById('mag').selectedIndex].value == tempMagic[i][j]) {
-
-                             return [i];
-                         }
-                     }
-                 }
-             }
+            
 
              function getIdSpec() {
                  var i = getIdMagic();
@@ -407,6 +405,7 @@
 
                  racePred();
                  countUmen();
+                 skilsCount();
              }
 
              function changeAtr() {
@@ -490,6 +489,7 @@
 
                  racePred();
                  countUmen();
+                 skilsCount();
              }
 
              function getIdAtributy() {
@@ -569,7 +569,21 @@
 
                  racePred();
                  countUmen();
+                 skilsCount();
              }
+
+
+ function getIdMagic() {
+                 for (var i = 0; i < tempMagic.length; i++) {
+                     for (var j = 0; j < tempMagic[i].length; j++) {
+                         if (document.getElementById('mag')[document.getElementById('mag').selectedIndex].value == tempMagic[i][j]) {
+                             return [i];
+                           break;
+                         }
+                     }
+                 }
+             }
+
 
              function changeMag() {
                  zapolnenieSkils();
@@ -585,14 +599,13 @@
                  var j = getIdSpec();
                  tempSkils.splice(i, 1);
                  tempNewYen.splice(i, 1);
-                 for (j; j < tempMagic[i].length; j++) {
+               
                      document.getElementById('text1').innerHTML = tempMagicAtr[i][j * 5];
                      document.getElementById('text2').innerHTML = tempMagicAtr[i][j * 5 + 1];
                      document.getElementById('text3').innerHTML = tempMagicAtr[i][j * 5 + 2];
                      document.getElementById('text4').innerHTML = tempMagicAtr[i][j * 5 + 3];
                      document.getElementById('text5').innerHTML = tempMagicAtr[i][j * 5 + 4] + '<br>';
-                     j = tempMagic[i].length;
-                 }
+                   
 
 
                  var el = document.getElementById('skils');
@@ -622,6 +635,7 @@
                  }
                  racePred();
                  countUmen();
+                 skilsCount();
              }
 
              function changeSkils() {
@@ -648,6 +662,7 @@
 
 
                  }
+               skilsCount();
              }
 
              function modify_qty(val, id) {
@@ -683,6 +698,7 @@
                      document.getElementById(name2).disabled = false;
                      document.getElementById('countSpec').innerHTML = countSpec;
                      document.getElementById(id).value = new_qty + "/" + pred;
+                     knowledgeCount();
                      return new_qty;
                  }
                  if (((countUmn > 0) || ((val < 0) && (countUmn == 0))) && ((id != 'qty9') && (id != 'qty10') && (id != 'qty11'))) {
@@ -717,9 +733,11 @@
                      document.getElementById('countUm').innerHTML = countUmn;
                      document.getElementById(id).value = new_qty + "/" + pred;
                      document.getElementById('qtyIni').value = parseInt(document.getElementById('qty3').value, 10) + parseInt(document.getElementById('qty7').value, 10);
+                      
+               knowledgeCount();
                      return new_qty;
                  }
-
+knowledgeCount();
              }
 
 
@@ -727,52 +745,71 @@
                  document.getElementById(id).removeAttribute('style');
              }
 
-			function onoffBut(idKach, id, element, rang, arr){
-				var blabel, bstyle, bcolor;
-                 var a = document.getElementById(idKach).innerHTML
-                 var idx = arr[0].indexOf(a);
-                     if (element.firstChild.innerHTML == "off") {
-                         blabel = "on";
-                         bstyle = "green";
-                         bcolor = "lightgreen";
-
-                        arr[0].push(a);
-                        arr[1].push(rang);
-                        document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) - Number(document.getElementById(id).value);
-                     } else {
-                         blabel = "off";
-                         bstyle = "lightgray";
-                         bcolor = "gray";
-
-                        arr[0].splice(idx, 1);
-                        arr[1].splice(idx, 1);
-                        document.getElementById('countKach').innerHTML = Number(document.getElementById('countKach').innerHTML) + Number(document.getElementById(id).value);
-                     }
-				var child = element.firstChild;
-                child.style.background = bstyle;
-                child.style.color = bcolor;
-                child.innerHTML = blabel;
-                 
+			function onoffBut(idKach, id, element, rang, arr, summ, idCarma){
+				var blabel, bstyle, bcolor, carmacount;
+        var a = document.getElementById(idKach).innerHTML
+        var idx = arr[0].indexOf(a);
+        if (element.firstChild.innerHTML == "off") {        
+          document.getElementById(summ).value = Number(document.getElementById(summ).value) - Number(document.getElementById(id).value);
+          
+            blabel = "on";
+            bstyle = "green";
+            bcolor = "lightgreen";
+            arr[0].push(a);
+            arr[1].push(rang);
+            if(idCarma!="0")
+            {                       
+              
+            if((idCarma=="plusCarma")||(idCarma=="minusCarma")){  document.getElementById(idCarma).value=Number(document.getElementById(idCarma).value)+Number(document.getElementById(id).value);
+                                                               }
+            }
+          colorChange(idCarma);
+         }
+        else 
+        {
+          blabel = "off";
+          bstyle = "lightgray";
+          bcolor = "gray";
+          arr[0].splice(idx, 1);
+          arr[1].splice(idx, 1);
+          document.getElementById(summ).value = Number(document.getElementById(summ).value) + Number(document.getElementById(id).value);
+          if(idCarma!="0")
+          {
+            
+           if((idCarma=="plusCarma")||(idCarma=="minusCarma")){  document.getElementById(idCarma).value=Number(document.getElementById(idCarma).value)-Number(document.getElementById(id).value);}
+            colorChange(idCarma);
+                                                              }
+          }
+				  var child = element.firstChild;
+          child.style.background = bstyle;
+          child.style.color = bcolor;
+          child.innerHTML = blabel;
+          colorChange(idCarma);
 			}
              function onoff(idKach, id, element, rang) {
 				 switch (id[0]) {
                     case 'p':
-                         onoffBut(idKach, id, element, rang, plusKachestvaArr)
+                         onoffBut(idKach, id, element, rang, plusKachestvaArr, "countKach", "plusCarma")
                          break
 					case 'm':
-                        onoffBut(idKach, id, element, rang, minusKachestvaArr)
+                        onoffBut(idKach, id, element, rang, minusKachestvaArr, "countKach", "minusCarma")
                          break
-					case 's':
-                        onoffBut(idKach, id, element, rang, SkilsArr)
+					case "s":
+                        onoffBut(idKach, id, element, rang, SkilsArr, "countSkils", "countSkils")
                          break	
 					case 'g':
-                        onoffBut(idKach, id, element, rang, groupSkilsArr)
-                         break	
+                        onoffBut(idKach, id, element, rang, groupSkilsArr, "countGroupSkils", "countGroupSkils")
+                         break
+          case 'n':
+                        onoffBut(idKach, id, element, rang, knowledgeArr, "countKnoledgeLanguage","countKnoledgeLanguage")
+                         break
+          case 'l':
+                        onoffBut(idKach, id, element, rang, languageArr, "countKnoledgeLanguage","countKnoledgeLanguage")
+                         break
 				}                
              }
 
 			function closeButton(id, arr, win){
-				
 				var el = document.getElementById(id);
                      if (el != null) {
                          while (el.childNodes.length > 0) {
@@ -808,7 +845,13 @@
                          break	
 					case 'groupSkilsArr':
                         closeButton(id, groupSkilsArr, win)
-                         break	
+                         break
+          case 'knoledgeArr':
+                        closeButton(id, knowledgeArr, win)
+                         break
+          case 'languageArr':
+                        closeButton(id, languageArr, win)
+                         break
 				}
 			}
 
@@ -877,4 +920,92 @@ document.getElementById(id).value=gr1[0].value+gr2[0].value;
 		
   document.getElementById(id).value=zn;
     onoff(idKach, id, element, rang);
+}
+
+function skilsCount(){
+  var sc = document.getElementById('skils').value.split('/');
+  document.getElementById('countSkils').value=sc[0];
+  document.getElementById('countGroupSkils').value=sc[1];
+  document.getElementById('SkilsArr').innerHTML="Тут будут умения.";
+  document.getElementById('groupSkilsArr').innerHTML="Тут будут группы умений.";
+  clearArrDiv("s", SkilsArr);
+  clearArrDiv("gs", groupSkilsArr);
+}
+
+function knowledgeCount(){
+  var sc1 = document.getElementById('qty6').value.split('/');
+  var sc2 = document.getElementById('qty7').value.split('/');
+  document.getElementById('countKnoledgeLanguage').value=(Number(sc1[0])+Number(sc2[0]))*2;
+  document.getElementById('knoledgeArr').innerHTML="Тут будут знания.";
+  document.getElementById('languageArr').innerHTML="Тут будут языки.";
+  clearArrDiv("n", knowledgeArr);
+  clearArrDiv("l", languageArr);
+}
+
+function clearArrDiv(el, arr){
+  arr[0]=[];
+  arr[1]=[];
+  for(var i =1; i<31; i++){
+    var ell=el+'kb'+i;
+    if(document.getElementById(ell)!=null){
+    var child = document.getElementById(ell).firstChild.firstChild;
+    child.style.background = "lightgray";
+    child.style.color = "gray";
+    child.innerHTML = "off";
+    }
+  }  
+}
+
+function colorChange(id){
+  var child = document.getElementById(id);
+  var temp;
+  var val;
+  switch (id) 
+      {
+        case "plusCarma":
+      temp=true;
+      val=25;
+  
+          break;
+        case "minusCarma":
+      temp=false;
+      val=-25;
+  
+          break;
+        case "countSkils":
+      temp=false;
+      val=0;
+  
+          break;
+        case "countGroupSkils":
+      temp=false;
+      val =0;   
+          break;
+      case "countKnoledgeLanguage":
+      temp=false;
+      val =0;   
+          break;
+       }
+  if(temp){
+    if(Number(child.value)>val)
+    {    
+      child.style.color = 'red';
+    }
+    else
+    {
+      child.style.color='gold';
+    }
+  }
+  else
+    {
+      if(Number(child.value)<val)
+    {    
+      child.style.color = 'red';
+    }
+    else
+    {
+      child.style.color='gold';
+    }
+    }
+  
 }

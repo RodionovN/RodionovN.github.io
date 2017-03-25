@@ -20,7 +20,17 @@ body{
     text-shadow: black 1px 1px 0, black -1px -1px 0, 
                  black -1px 1px 0, black 1px -1px 0;
 } 
+.select-style-wpandyou select {
+  background: #444;
+	color: #C4BE92;
+   }
 
+.select-style-wpandyou {
+    border: 1px solid #CCC;
+    overflow: hidden; 
+  background-color: #444;
+	color: #C4BE92;
+   }
 #text01{ 
 	color: lime; 
 	font-family: Impact; 
@@ -233,6 +243,20 @@ button:hover, button:active, button:focus {
     text-shadow: black 1px 1px 0, black -1px -1px 0, 
                  black -1px 1px 0, black 1px -1px 0;
 } 
+#countTable{ 
+	width:100%;
+	position: left;
+	float:left;
+}
+.countUm2{
+	color: gold; 
+  text-align: left;
+	font-family: Impact; 
+	font-size: 40px; 
+	word-spacing: 0px; 
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+} 
 
 .table{
 	
@@ -339,6 +363,30 @@ button:hover, button:active, button:focus {
 	cursor: pointer;
 }
 #win4 h3 {
+	text-align: center;
+	color: #555;
+}
+#win5 button {
+	float: right;
+	line-height: 20px;
+	margin: 1.2em;
+}
+#win5 button[type="button"]:hover {
+	cursor: pointer;
+}
+#win5 h3 {
+	text-align: center;
+	color: #555;
+}
+#win6 button {
+	float: right;
+	line-height: 20px;
+	margin: 1.2em;
+}
+#win6 button[type="button"]:hover {
+	cursor: pointer;
+}
+#win6 h3 {
 	text-align: center;
 	color: #555;
 }
