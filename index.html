@@ -12,14 +12,13 @@
 </script>
 
 <body onload="zapolnenie()">
-
+<div id="picture">
     <div id="pict">
-        <a href="pictures/Shadowrun_5_rus_perevod_GMD_v1_2.pdf"><img src="pictures/lable.png" alt="lable" width="100" height="100" align="right" /></a>
+        <a href="pictures/Shadowrun_5_rus_perevod_GMD_v1_2.pdf" ><img src="pictures/lable.png" alt="lable" width="100" height="100"/></a>
     </div>
-    <h1 id="ShadowRun">
-        SHADOWRUN
-
-    </h1>
+	</div>
+  <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+  <div class="glitch" id="ShadowRun" data-text="SHADOWRUN">SHADOWRUN</div>
 
     <div class="selection">
         <lable id="rassa">Расса:</lable>
@@ -60,61 +59,61 @@
         </table>
     </div>
     <div class="countUm">
-        <lable>Очки умений:</lable>
+        <lable>Очки атрибутов:</lable>
         <lable id="countUm">14</lable>
     </div>
     <div class="box" id="box1">
         <div class="har" id="har1">
             <label for="qty1"><abbr title="Quantity">Тело</abbr></label>
-            <input id="qty1" value="0/7" readonly/>
+            <input id="qty1" value="0/7" disabled/>
             <button id="down1" onclick="modify_qty(-1,'qty1')">-1</button>
             <button id="up1" onclick="modify_qty(1,'qty1')">+1</button>
         </div>
         <div class="har" id="har2">
             <label for="qty2"><abbr title="Quantity">Ловкость</abbr></label>
-            <input id="qty2" value="0/5" readonly/>
+            <input id="qty2" value="0/5" disabled/>
             <button id="down2" onclick="modify_qty(-1, 'qty2')">-1</button>
             <button id="up2" onclick="modify_qty(1,'qty2')">+1</button>
         </div>
         <div class="har" id="har3">
             <label for="qty3"><abbr title="Quantity">Раекция</abbr></label>
-            <input id="qty3" value="0/7" readonly/>
+            <input id="qty3" value="0/7" disabled/>
             <button id="down3" onclick="modify_qty(-1,'qty3')">-1</button>
             <button id="up3" onclick="modify_qty(1,'qty3')">+1</button>
         </div>
         <div class="har" id="har4">
             <label for="qty4"><abbr title="Quantity">Сила</abbr></label>
-            <input id="qty4" value="0/5" readonly/>
+            <input id="qty4" value="0/5" disabled/>
             <button id="down4" onclick="modify_qty(-1, 'qty4')">-1</button>
             <button id="up4" onclick="modify_qty(1,'qty4')">+1</button>
         </div>
         <div class="har" id="har5">
             <label for="qty5"><abbr title="Quantity">Сила воли</select></abbr></abbr></label>
-            <input id="qty5" value="0/7" readonly/>
+            <input id="qty5" value="0/7" disabled/>
             <button id="down5" onclick="modify_qty(-1,'qty5')">-1</button>
             <button id="up5" onclick="modify_qty(1,'qty5')">+1</button>
         </div>
         <div class="har" id="har6">
             <label for="qty6"><abbr title="Quantity">Логика</abbr></label>
-            <input id="qty6" value="0/5" readonly/>
+            <input id="qty6" value="0/5" disabled/>
             <button id="down6" onclick="modify_qty(-1, 'qty6')">-1</button>
             <button id="up6" onclick="modify_qty(1,'qty6')">+1</button>
         </div>
         <div class="har" id="har7">
             <label for="qty7"><abbr title="Quantity">Интуиция</abbr></label>
-            <input id="qty7" value="0/7" readonly/>
+            <input id="qty7" value="0/7" disabled/>
             <button id="down7" onclick="modify_qty(-1,'qty7')">-1</button>
             <button id="up7" onclick="modify_qty(1,'qty7')">+1</button>
         </div>
         <div class="har" id="har8">
             <label for="qty8"><abbr title="Quantity">Харизма</abbr></label>
-            <input id="qty8" value="0/5" readonly/>
+            <input id="qty8" value="0/5" disabled/>
             <button id="down8" onclick="modify_qty(-1, 'qty8')">-1</button>
             <button id="up8" onclick="modify_qty(1,'qty8')">+1</button>
         </div>
         <div class="har" id="har8">
             <label for="qtyIni"><abbr title="Quantity">Инициатива</abbr></label>
-            <input id="qtyIni" value="2" readonly/>
+            <input id="qtyIni" value="3" disabled/>
         </div>
     </div>
     <div class="countUm">
@@ -124,19 +123,19 @@
     <div class="box" id="box1">
         <div class="har" id="har9">
             <label for="qty9"><abbr title="Quantity">Грань</abbr></label>
-            <input id="qty9" value="0/5" readonly/>
+            <input id="qty9" value="0/5" disabled/>
             <button id="down9" onclick="modify_qty(-1, 'qty9')">-1</button>
             <button id="up9" onclick="modify_qty(1,'qty9')">+1</button>
         </div>
         <div class="har" id="har10">
             <label for="qty10"><abbr title="Quantity">Магия</abbr></label>
-            <input id="qty10" value="0/0" readonly/>
+            <input id="qty10" value="0/0" disabled/>
             <button id="down10" onclick="modify_qty(-1, 'qty10')">-1</button>
             <button id="up10" onclick="modify_qty(1,'qty10')">+1</button>
         </div>
         <div class="har" id="har11">
             <label for="qty11"><abbr title="Quantity">Резонанс</abbr></label>
-            <input id="qty11" value="0/0" readonly/>
+            <input id="qty11" value="0/0" disabled/>
             <button id="down11" onclick="modify_qty(-1, 'qty11')">-1</button>
             <button id="up11" onclick="modify_qty(1,'qty11')">+1</button>
         </div>
