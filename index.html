@@ -23,9 +23,12 @@
     <h2>
         Введите сайт и даты
     </h2>
-    <input type="text" id='input' placeholder="https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo"></input>
-    <input type="date" id='date1' value="28.06.2020"></input>
-    <input type="date" id='date2' value="01.07.2020"></input>
+    <div><input style="width: 100%;" type="text" id='input'
+            placeholder="https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo"></input>
+    </div>
+    <div><input type="date" id='date1' value="28.06.2020"></input>
+        <input type="date" id='date2' value="01.07.2020"></input>
+    </div>
 
     <input type="button" onclick="parseSites()" value="Start" />
     <input id='buttonGetExcel' type="button" onclick="getCSV()" value="GetCSV" disabled />
