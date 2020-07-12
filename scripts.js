@@ -20,7 +20,7 @@ function getCSV() {
         rowItem.querySelectorAll('th').forEach(function (item, ind, ar) {
             var temp = '';
             temp = item.innerHTML;
-            temp = '"' + temp.replace(/&nbsp;|\n|<br>|&lt|&gt/ig, '') + '"'
+            temp = '"' + replaceSpecSymb(temp) + '"'
             console.log(temp)
             row.push(temp)
         })
@@ -31,10 +31,9 @@ function getCSV() {
             } else {
                 temp = item.innerHTML;
             }
-            temp = '"' + temp.replace(/&nbsp;|\n|<br>|&lt|&gt/ig, '') + '"'
+            temp = '"' + replaceSpecSymb(temp) + '"'
             row.push(temp)
         })
-
         arr.push(row)
     })
 
@@ -46,6 +45,11 @@ function getCSV() {
     document.body.appendChild(link); // Required for FF
 
     link.click();
+}
+
+function replaceSpecSymb(str) {
+    str = str.replace(/<br>/ig, ' ');
+    return str.replace(/&nbsp;|\n|&lt|&gt/ig, '')
 }
 
 async function firstQuery() {
@@ -88,15 +92,62 @@ async function getPage(num, result, date1, date2, maxPage = 1) {
         var strForSearch = num === 1 ? "table[id='tablcont'] tr" : "table[id='tablcont'] tr:not(:first-child)"
         var res = result.querySelectorAll(strForSearch);
         if (num)
-            res.forEach((element) => {
-                if (element.querySelector('a')) {
+            res.forEach((row) => {
+                if (row.querySelector('a')) {
                     console.log()
-                    element.querySelector('a').href = element.querySelector('a').href.replace(/file:\/\/\/c:/i, str)
+                    row.querySelector('a').href = row.querySelector('a').href.replace(/file:\/\/\/c:/i, str)
                 };
                 var table2 = document.querySelector("[id='table']")
-                table2.appendChild(element);
+                var crEl = document.createElement("tr");
+                splitRow(row).forEach((el) => {
+                    crEl.appendChild(el)
+                })
+                table2.appendChild(crEl);
             });
         document.getElementById("downloadPage").innerHTML = `Загружено ${num} из ${maxPage}`
     }
     str = ''
+}
+
+function splitRow(row) {
+    var nodeList = [];
+    if (row.querySelector('th')) {
+        row.querySelectorAll('th').forEach(function (item, i, arr) {
+            if (item.innerHTML.indexOf('Категория') > -1) {
+                item.innerHTML = item.innerHTML.split('/')[0]
+                var istec = document.createElement("th");
+                istec.innerHTML = 'Истец';
+                var resp = document.createElement("th");
+                resp.innerHTML = 'Ответчик'
+                nodeList.push(item);
+                nodeList.push(istec);
+                nodeList.push(resp);
+            }
+            else {
+                nodeList.push(item);
+            }
+        })
+    }
+    else {
+        row.querySelectorAll('td').forEach(function (item, i, arr) {
+            if (i == 2) {
+                var resp = document.createElement("td");
+                var istec = document.createElement("td");
+                var itemAndResp = item.innerHTML.split("ОТВЕТЧИК: ");
+                resp.innerHTML = itemAndResp.length > 1 ? itemAndResp[1] : ''
+                var itemAndIstec = itemAndResp[0].split("ИСТЕЦ(ЗАЯВИТЕЛЬ): ");
+                istec.innerHTML = itemAndIstec[1];
+                item.innerHTML = itemAndIstec[0].split("КАТЕГОРИЯ:")[1];
+
+                nodeList.push(item);
+                nodeList.push(istec);
+                nodeList.push(resp);
+            }
+            else {
+                nodeList.push(item);
+            }
+        }
+        )
+    }
+    return nodeList;
 }
