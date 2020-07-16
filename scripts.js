@@ -1,16 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 })
-
+var timeout = 700
+var timeStart = 0
 function parseSites() {
-    firstQuery().then(nextPagesLoaded()).then(
-        function () {
-            document.getElementById("buttonGetExcel").removeAttribute("disabled")
-        }
-    )
+    try {
+        timeStart = new Date().getTime();
+        document.getElementById("status").innerHTML = "GO"
+        firstQuery()
+        document.getElementById("loader").style.visibility = "hidden"
+        document.getElementById("buttonGetExcel").removeAttribute("disabled")
+    }
+    catch (e) {
+        console.log(e)
+    }
 }
-
-
+function replaceSpecSymb(str) {
+    str = str.replace(/<br>/ig, ' ');
+    return str.replace(/&nbsp;|\n|&lt|&gt/ig, '')
+}
 function getCSV() {
     const arr = []
     const rows = document.querySelectorAll("[id='table'] tr")
@@ -18,25 +26,24 @@ function getCSV() {
     rows.forEach(function (rowItem, i, array) {
         var row = []
         rowItem.querySelectorAll('th').forEach(function (item, ind, ar) {
-            var temp = '';
+            let temp = '';
             temp = item.innerHTML;
             temp = '"' + replaceSpecSymb(temp) + '"'
-            console.log(temp)
-            row.push(temp)
+            temp =
+                row.push(temp)
         })
         rowItem.querySelectorAll('td').forEach(function (item, ind, ar) {
-            var temp = '';
+            let temp = '';
             if (item.querySelector('a') != null) {
                 temp = item.querySelector('a').href
             } else {
                 temp = item.innerHTML;
+                temp = '"' + replaceSpecSymb(temp) + '"'
             }
-            temp = '"' + replaceSpecSymb(temp) + '"'
             row.push(temp)
         })
         arr.push(row)
     })
-
     var universalBOM = "\ufeff";
     let csvString = arr.map(e => e.join(";")).join("\n");
     var link = document.createElement("a");
@@ -47,107 +54,187 @@ function getCSV() {
     link.click();
 }
 
+const concatRes = (res) => {
+    console.log('concatRes', res);
+    if (res.response && res.response.result && res.response.result.length > 0) {
+
+        res.response.result.forEach((curItem) => {
+            console.log(curItem)
+            if (curItem.result.length > 0) {
+                curItem.result.forEach(item => {
+                    console.log(item)
+                    var number = document.createElement('td')
+                    var dateStart = document.createElement('td')
+                    var name = document.createElement('td')
+                    var ispDoc = document.createElement('td')
+                    var dateEnd = document.createElement('td')
+                    var osn = document.createElement('td')
+                    var objIsp = document.createElement('td')
+                    var summ = document.createElement('td')
+                    var department = document.createElement('td')
+                    var bailiff = document.createElement('td')
+                    number.innerHTML = item.exe_production.split('от')[0]
+                    dateStart.innerHTML = item.exe_production.split('от')[1]
+                    name.innerHTML = item.name
+                    ispDoc.innerHTML = item.details
+                    dateEnd.innerHTML = item.ip_end.split(',')[0]
+                    var osnStr = item.ip_end.substring(item.ip_end.indexOf(' ')).split(', ')
+                    osn.innerHTML = item.ip_end ? `ст ${osnStr[0]}, ч ${osnStr[1]}, п ${osnStr[2]}` : ''
+                    objIsp.innerHTML = item.subject.split(':')[0]
+                    summ.innerHTML = item.subject.split(':')[1] ? item.subject.split(':')[1] : ''
+                    department.innerHTML = item.department
+                    bailiff.innerHTML = item.bailiff
+                    var tableRow = document.createElement('tr');
+                    tableRow.appendChild(number)
+                    tableRow.appendChild(dateStart)
+                    tableRow.appendChild(name)
+                    tableRow.appendChild(ispDoc)
+                    tableRow.appendChild(dateEnd)
+                    tableRow.appendChild(osn)
+                    tableRow.appendChild(objIsp)
+                    tableRow.appendChild(summ)
+                    tableRow.appendChild(department)
+                    tableRow.appendChild(bailiff)
+                    document.getElementById('tbody').appendChild(tableRow)
+
+                })
+            }
+        })
+    }
+    StepByStep(sliseArray)
+}
+
 function replaceSpecSymb(str) {
     str = str.replace(/<br>/ig, ' ');
     return str.replace(/&nbsp;|\n|&lt|&gt/ig, '')
 }
-
+let sliseArray = []
 async function firstQuery() {
-    var result = document.getElementById("results");
-    var date1 = document.getElementById("date1").value;
-    var date2 = document.getElementById("date2").value;
     document.getElementById("loader").style.visibility = 'visible';
+    var token = 'vftMZ4Xip5WA'
+    var start = document.getElementById("numberStart").value;
+    var end = document.getElementById("numberEnd").value;
     document.getElementById('results').innerHTML = '';
-    document.getElementById('table').innerHTML = '';
-    await getPage(1, result, date1, date2)
-}
+    document.getElementById('tbody').innerHTML = '';
+    var year = document.getElementById("year").value;
+    var ip = document.getElementById("ip").value;
+    let varRequest = []
 
-async function nextPagesLoaded() {
-    await setTimeout(() => {
-        var result = document.getElementById("results");
-        var date1 = document.getElementById("date1").value;
-        var date2 = document.getElementById("date2").value;
-        var textPos = result.innerText.indexOf('Всего по запросу найдено — ') + "Всего по запросу найдено — ".length
-        maxPage = Math.ceil(parseInt(result.innerText.substr(textPos,
-            result.innerText.indexOf('.', textPos) - textPos)) / 25);
-        for (var i = 2; i <= maxPage; i++) {
-            getPage(i, result, date1, date2, maxPage)
-            if (i > 300) {
-                break;
-            }
-        }
-        document.getElementById("loader").style.visibility = "hidden"
-    }, 1);
-}
 
-async function getPage(num, result, date1, date2, maxPage = 1) {
-    var str = document.getElementById('input').value;
-    var pageStr = '&name_op=r&page=' + num + '&delo_id=1540005&case_type=0&new=0&G1_PARTS__NAMESS=&g1_case__CASE_NUMBERSS=&g1_case__JUDICIAL_UIDSS=&delo_table=g1_case&g1_case__ENTRY_DATE1D=' + date1 + '&g1_case__ENTRY_DATE2D=' + date2 + '&G1_CASE__JUDGE=&g1_case__RESULT_DATE1D=&g1_case__RESULT_DATE2D=&G1_CASE__RESULT=&G1_CASE__BUILDING_ID=&G1_CASE__COURT_STRUCT=&G1_EVENT__EVENT_NAME=&G1_EVENT__EVENT_DATEDD=&G1_PARTS__PARTS_TYPE=&G1_PARTS__INN_STRSS=&G1_PARTS__KPP_STRSS=&G1_PARTS__OGRN_STRSS=&G1_PARTS__OGRNIP_STRSS=&G1_RKN_ACCESS_RESTRICTION__RKN_REASON=&g1_rkn_access_restriction__RKN_RESTRICT_URLSS=&G1_DOCUMENT__PUBL_DATE1D=&G1_DOCUMENT__PUBL_DATE2D=&G1_CASE__VALIDITY_DATE1D=&G1_CASE__VALIDITY_DATE2D=&G1_ORDER_INFO__ORDER_DATE1D=&G1_ORDER_INFO__ORDER_DATE2D=&G1_ORDER_INFO__ORDER_NUMSS=&G1_ORDER_INFO__STATE_ID=&Submit=%CD%E0%E9%F2%E8'
-    //'/modules.php?name=sud_delo&srv_num=1&name_op=r&page=' + num + '&delo_id=1540005&case_type=0&new=0&G1_PARTS__NAMESS=&g1_case__CASE_NUMBERSS=&g1_case__JUDICIAL_UIDSS=&delo_table=g1_case&g1_case__ENTRY_DATE1D=' + date1 + '&g1_case__ENTRY_DATE2D=' + date2 + '&G1_CASE__JUDGE=&g1_case__RESULT_DATE1D=&g1_case__RESULT_DATE2D=&G1_CASE__RESULT=&G1_CASE__BUILDING_ID=&G1_CASE__COURT_STRUCT=&G1_EVENT__EVENT_NAME=&G1_EVENT__EVENT_DATEDD=&G1_PARTS__PARTS_TYPE=&G1_PARTS__INN_STRSS=&G1_PARTS__KPP_STRSS=&G1_PARTS__OGRN_STRSS=&G1_PARTS__OGRNIP_STRSS=&G1_RKN_ACCESS_RESTRICTION__RKN_REASON=&g1_rkn_access_restriction__RKN_RESTRICT_URLSS=&G1_DOCUMENT__PUBL_DATE1D=&G1_DOCUMENT__PUBL_DATE2D=&G1_CASE__VALIDITY_DATE1D=&G1_CASE__VALIDITY_DATE2D=&G1_ORDER_INFO__ORDER_DATE1D=&G1_ORDER_INFO__ORDER_DATE2D=&G1_ORDER_INFO__ORDER_NUMSS=&G1_ORDER_INFO__STATE_ID=&Submit=%CD%E0%E9%F2%E8'
-    var reqNew = new XMLHttpRequest()
-    reqNew.open('GET', 'https://cors-anywhere.herokuapp.com/' + str + pageStr, false)
-    await reqNew.send()
-    if (reqNew.status == 200) {
-        result.innerHTML = reqNew.response
-        var strForSearch = num === 1 ? "table[id='tablcont'] tr" : "table[id='tablcont'] tr:not(:first-child)"
-        var res = result.querySelectorAll(strForSearch);
-        if (num)
-            res.forEach((row) => {
-                if (row.querySelector('a')) {
-                    console.log()
-                    row.querySelector('a').href = row.querySelector('a').href.replace(/file:\/\/\/c:/i, str)
-                };
-                var table2 = document.querySelector("[id='table']")
-                var crEl = document.createElement("tr");
-                splitRow(row).forEach((el) => {
-                    crEl.appendChild(el)
-                })
-                table2.appendChild(crEl);
-            });
-        document.getElementById("downloadPage").innerHTML = `Загружено ${num} из ${maxPage}`
-    }
-    str = ''
-}
-
-function splitRow(row) {
-    var nodeList = [];
-    if (row.querySelector('th')) {
-        row.querySelectorAll('th').forEach(function (item, i, arr) {
-            if (item.innerHTML.indexOf('Категория') > -1) {
-                item.innerHTML = item.innerHTML.split('/')[0]
-                var istec = document.createElement("th");
-                istec.innerHTML = 'Истец';
-                var resp = document.createElement("th");
-                resp.innerHTML = 'Ответчик'
-                nodeList.push(item);
-                nodeList.push(istec);
-                nodeList.push(resp);
-            }
-            else {
-                nodeList.push(item);
+    for (var i = start; i <= end; i++) {
+        varRequest.push({
+            "type": 3,
+            "params": {
+                "number": `${i}/${year}/${ip}-ИП`
             }
         })
     }
-    else {
-        row.querySelectorAll('td').forEach(function (item, i, arr) {
-            if (i == 2) {
-                var resp = document.createElement("td");
-                var istec = document.createElement("td");
-                var itemAndResp = item.innerHTML.split("ОТВЕТЧИК: ");
-                resp.innerHTML = itemAndResp.length > 1 ? itemAndResp[1] : ''
-                var itemAndIstec = itemAndResp[0].split("ИСТЕЦ(ЗАЯВИТЕЛЬ): ");
-                istec.innerHTML = itemAndIstec[1];
-                item.innerHTML = itemAndIstec[0].split("КАТЕГОРИЯ:")[1];
+    while (varRequest.length > 0) {
+        sliseArray.push(varRequest.splice(0, 50))
+    }
+    var i = 0;
+    console.log(sliseArray)
+    StepByStep(sliseArray)
+}
 
-                nodeList.push(item);
-                nodeList.push(istec);
-                nodeList.push(resp);
+async function StepByStep(sliseArray) {
+    if (sliseArray.length > 0) {
+        let item = sliseArray.splice(0, 1)[0]
+        getUID(item)
+    }
+    else {
+        const end = new Date().getTime();
+        document.getElementById('time').innerHTML = (end - timeStart) / 1000
+        document.getElementById("status").innerHTML = "DONE"
+    }
+
+}
+/*for (const item of sliseArray) {
+        await (async function (item) {
+            await getUID(item).then(
+                async () =>
+                    setTimeout(() => {
+ 
+                    }, timeout + 1000)
+            )
+        })(item)
+    }*/
+//'48485/19/66049-ИП'
+//'26121/17/66023-ИП'
+//'18842/18/66007-ИП'
+function getUID(varRequest, token = 'vftMZ4Xip5WA') {
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', `https://cors-anywhere.herokuapp.com/https://api-ip.fssprus.ru/api/v1.0/search/group`, false);
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    try {
+        xhr.send(JSON.stringify({
+            "token": token,
+            "request": varRequest
+        }));
+        if (xhr.status != 200) {
+            alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+        } else {
+            console.log('getUID', xhr.response)
+            return setTimeout(() => {
+                getStatus(JSON.parse(xhr.response).response.task)
+            }, timeout);
+        }
+    } catch (err) { // для отлова ошибок используем конструкцию try...catch вместо onerror
+        console.log(err)
+        alert("getUID Запрос не удался");
+    }
+}
+
+
+
+function getStatus(uid, token = 'vftMZ4Xip5WA') {
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', `https://cors-anywhere.herokuapp.com/https://api-ip.fssprus.ru/api/v1.0/status?token=${token}&task=${uid}`, false);
+
+    try {
+        xhr.send();
+        if (xhr.status != 200) {
+            alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+        } else {
+            let res = JSON.parse(xhr.response)
+            console.log('getStatus', res)
+            if (res.response.status != 0) {
+                return setTimeout(() => {
+                    return getStatus(uid, token)
+                }, timeout);
             }
             else {
-                nodeList.push(item);
+                getResult(uid)
             }
         }
-        )
+    } catch (err) { // для отлова ошибок используем конструкцию try...catch вместо onerror
+        alert("getStatus Запрос не удался");
     }
-    return nodeList;
+}
+function getResult(uid, token = 'vftMZ4Xip5WA') {
+    let xhr = new XMLHttpRequest();
+    console.log('token-' + token, 'uid-' + uid);
+
+    xhr.open('GET', `https://cors-anywhere.herokuapp.com/https://api-ip.fssprus.ru/api/v1.0/result?token=${token}&task=${uid}`, false);
+
+    try {
+        xhr.send();
+        if (xhr.status != 200) {
+            alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+        } else {
+            let res = JSON.parse(xhr.response)
+            console.log('getResult', res)
+            setTimeout(() => {
+                concatRes(res)
+            }, timeout);
+            return true
+        }
+    } catch (err) { // для отлова ошибок используем конструкцию try...catch вместо onerror
+        console.log(err)
+        alert("getResult Запрос не удался");
+    }
 }
