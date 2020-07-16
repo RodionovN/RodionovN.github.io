@@ -23,11 +23,17 @@
     <h2>
         Введите сайт и даты
     </h2>
-    <div><input style="width: 100%;" type="text" id='input'
-            placeholder="https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo"></input>
+    <div>
+        <p>Status: <span id='status'>Wait</span></p>
     </div>
-    <div><input type="date" id='date1' value="28.06.2020"></input>
-        <input type="date" id='date2' value="01.07.2020"></input>
+    <div>
+        <input style="width: 100%;" type="number" id='numberStart' placeholder="0" value=26121></input>
+        <input style="width: 100%;" type="number" id='numberEnd' placeholder="1000" value=26122></input>
+        <input style="width: 100%;" type="number" id='year' placeholder="17" value=17></input>
+        <input style="width: 100%;" type="text" id='ip' placeholder="66049-ИП" value='66023'></input>
+    </div>
+    <div>
+        <p>Time: <span id='time'>0</span> c.</p>
     </div>
 
     <input type="button" onclick="parseSites()" value="Start" />
@@ -37,10 +43,22 @@
     </div>
     <p id='downloadPage'></p>
     <div>
-        <table>
-            <tbody id="table">
-
-            </tbody>
+        <table id='table'>
+            <thead>
+                <tr id='header'>
+                    <th>Номер исполнительного производства</th>
+                    <th>Дата возбуждения исполпроизводства</th>
+                    <th>Наименование должника по исполпроизводству</th>
+                    <th>Реквизиты исполнительного документа</th>
+                    <th>Дата закрытия исполпроизводства</th>
+                    <th>Основания закрытия исполпроизводства</th>
+                    <th>Предмет исполнения</th>
+                    <th>Сумма непогашенной задолженности, руб.</th>
+                    <th>Отдел судебных приставов</th>
+                    <th>Судебный пристав-исполнитель</th>
+                </tr>
+            </thead>
+            <tbody id='tbody'></tbody>
         </table>
     </div>
 </body>
