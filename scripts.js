@@ -60,10 +60,8 @@ const concatRes = (res) => {
     if (res.response && res.response.result && res.response.result.length > 0) {
 
         res.response.result.forEach((curItem) => {
-            console.log(curItem)
             if (curItem.result.length > 0) {
                 curItem.result.forEach(item => {
-                    console.log(item)
                     var number = document.createElement('td')
                     var dateStart = document.createElement('td')
                     var name = document.createElement('td')
@@ -120,7 +118,6 @@ async function firstQuery() {
     var year = document.getElementById("year").value;
     var ip = document.getElementById("ip").value;
     let varRequest = []
-    console.log(start, end)
 
     for (var i = start; i <= end; i++) {
         varRequest.push({
@@ -134,7 +131,6 @@ async function firstQuery() {
         sliseArray.push(varRequest.splice(0, 50))
     }
     var i = 0;
-    console.log(sliseArray)
     StepByStep(sliseArray)
 }
 
@@ -197,7 +193,6 @@ function getUID(varRequest, token = 'vftMZ4Xip5WA') {
             }, timeout);
         }
     } catch (err) { // для отлова ошибок используем конструкцию try...catch вместо onerror
-        console.log(err)
         alert("getUID Запрос не удался");
     }
 }
@@ -262,7 +257,6 @@ function getResult(uid, token = 'vftMZ4Xip5WA') {
             return true
         }
     } catch (err) { // для отлова ошибок используем конструкцию try...catch вместо onerror
-        console.log(err)
         alert("getResult Запрос не удался");
     }
 }
