@@ -1,8 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () {
-
-})
-var timeout = 700
+var timeout = 1000
 var timeStart = 0
+document.addEventListener('DOMContentLoaded', function () {
+    timeout = document.getElementById('timeout').value
+})
+
 function parseSites() {
     try {
         timeStart = new Date().getTime();
@@ -112,14 +113,14 @@ let sliseArray = []
 async function firstQuery() {
     document.getElementById("loader").style.visibility = 'visible';
     var token = 'vftMZ4Xip5WA'
-    var start = document.getElementById("numberStart").value;
-    var end = document.getElementById("numberEnd").value;
+    var start = parseInt(document.getElementById("numberStart").value);
+    var end = parseInt(document.getElementById("numberEnd").value);
     document.getElementById('results').innerHTML = '';
     document.getElementById('tbody').innerHTML = '';
     var year = document.getElementById("year").value;
     var ip = document.getElementById("ip").value;
     let varRequest = []
-
+    console.log(start, end)
 
     for (var i = start; i <= end; i++) {
         varRequest.push({
@@ -137,6 +138,8 @@ async function firstQuery() {
     StepByStep(sliseArray)
 }
 
+
+
 async function StepByStep(sliseArray) {
     if (sliseArray.length > 0) {
         let item = sliseArray.splice(0, 1)[0]
@@ -146,6 +149,7 @@ async function StepByStep(sliseArray) {
         const end = new Date().getTime();
         document.getElementById('time').innerHTML = (end - timeStart) / 1000
         document.getElementById("status").innerHTML = "DONE"
+        sliseArray = []
     }
 
 }
@@ -174,7 +178,18 @@ function getUID(varRequest, token = 'vftMZ4Xip5WA') {
             "request": varRequest
         }));
         if (xhr.status != 200) {
-            alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+            if (xhr.status == 429) {
+                alert(`Ошибка ${xhr.status}: ${xhr.statusText}(было слишком много запросов)\n попробуйте повторить запрос позже`);
+                document.getElementById("status").innerHTML = "STOP"
+                sliseArray = []
+                return false;
+            }
+            else {
+                alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+                document.getElementById("status").innerHTML = "STOP"
+                sliseArray = []
+                return false
+            }
         } else {
             console.log('getUID', xhr.response)
             return setTimeout(() => {
@@ -198,7 +213,17 @@ function getStatus(uid, token = 'vftMZ4Xip5WA') {
     try {
         xhr.send();
         if (xhr.status != 200) {
-            alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+            if (xhr.status == 429) {
+                return setTimeout(() => {
+                    return getStatus(uid, token)
+                }, timeout + 1000);
+            }
+            else {
+                alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+                document.getElementById("status").innerHTML = "STOP"
+                sliseArray = []
+                return false
+            }
         } else {
             let res = JSON.parse(xhr.response)
             console.log('getStatus', res)
@@ -225,6 +250,9 @@ function getResult(uid, token = 'vftMZ4Xip5WA') {
         xhr.send();
         if (xhr.status != 200) {
             alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
+            document.getElementById("status").innerHTML = "STOP"
+            sliseArray = []
+            return false
         } else {
             let res = JSON.parse(xhr.response)
             console.log('getResult', res)
