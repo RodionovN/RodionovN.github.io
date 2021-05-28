@@ -1,338 +1,813 @@
-<!doctype html>
+<!DOCTYPE HTML>
+
 <html>
-<meta charset="utf-8">
-<script src='scripts.js'>
-
-</script>
-
-<div class="loader" id="loader">
-    <div class="l_main">
-        <div class="l_square"><span></span><span></span><span></span></div>
-        <div class="l_square"><span></span><span></span><span></span></div>
-        <div class="l_square"><span></span><span></span><span></span></div>
-        <div class="l_square"><span></span><span></span><span></span></div>
-    </div>
-</div>
-
 
 <head>
-    <h1>Sites Parser</h1>
+    <title></title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+
 </head>
+<script src="scripts/scripts.js">
+</script>
 
-<body>
-    <h2>
-        Введите начальный и конечные номера, год, и номер ИП.
-    </h2>
-    <div>
-        <p>Status: <span id='status'>Wait</span></p>
+<body onload="zapolnenie()">
+<div id="picture">
+    <div id="pict">
+        <a href="pictures/Shadowrun_5_rus_perevod_GMD_v1_2.pdf" ><img src="pictures/lable.png" alt="lable" width="100" height="100"/></a>
     </div>
-    <div style="margin-bottom: 10px;">
-        <label for="timeout">Время ожидания между запросами </label>
-        <input style="width: 10%;" type="number" id='timeout' placeholder="0" value=1000></input>
-        <span>мс</span>
-    </div>
-    <div>
-        <label for="numberStart">С</label>
-        <input style="width: 10%;" type="number" id='numberStart' placeholder="0" value=26121></input>
-        <label for="numberEnd">по</label>
-        <input style="width: 10%;" type="number" id='numberEnd' placeholder="1000" value=26122 title='по'></input>
-        <label for="numberStart">/</label>
-        <input style="width: 10%;" type="number" id='year' placeholder="17" value=17 title='Год'></input>
-        <label for="numberStart">/</label>
-        <input style="width: 10%;" type="text" id='ip' placeholder="66049-ИП" value='66023' title='ИП'></input>
-        <span>-ИП</span>
-    </div>
-    <div>
-        <p>Time: <span id='time'>0</span> c.</p>
+	</div>
+  <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+  <div class="glitch" id="ShadowRun" data-text="SHADOWRUN">SHADOWRUN</div>
+
+    <div class="selection">
+        <lable id="rassa">Расса:</lable>
+        <select class="select-style-wpandyou" id="race" onchange="changeRace()"><br></select>
+        <lable id="gmr">Спец. атрибуты:</lable>
+        <select class="select-style-wpandyou" id="atr" onchange="changeAtr()"><br></select>
+        <lable id="haracteristic">Атрибуты:</lable>
+        <select class="select-style-wpandyou" id="atribut" onchange="changeAtribut()"><br></select>
+        <lable id="magsince">Магия/Резонанс:</lable>
+        <select class="select-style-wpandyou" id="mag" onchange="changeMag()"><br>
+        </select>
+        <lable id="magsince">Умения:</lable>
+        <select class="select-style-wpandyou" id="skils" onchange="changeSkils()"><br>		
+        </select>
+        <lable id="magsince">Наличность:</lable>
+      <select class="select-style-wpandyou" id="newyen">
+        </select>
+        <lable id="text6">¥</lable>
+        <hr id="Line"></hr>
     </div>
 
-    <input type="button" onclick="parseSites()" value="Start" />
-    <input id='buttonGetExcel' type="button" onclick="getCSV()" value="GetCSV" disabled />
-    <div id='results' hidden>
-
-    </div>
-    <p id='downloadPage'></p>
-    <div>
-        <table id='table'>
-            <thead>
-                <tr id='header'>
-                    <th>Номер исполнительного производства</th>
-                    <th>Дата возбуждения исполпроизводства</th>
-                    <th>Наименование должника по исполпроизводству</th>
-                    <th>Реквизиты исполнительного документа</th>
-                    <th>Дата закрытия исполпроизводства</th>
-                    <th>Основания закрытия исполпроизводства</th>
-                    <th>Предмет исполнения</th>
-                    <th>Сумма непогашенной задолженности, руб.</th>
-                    <th>Отдел судебных приставов</th>
-                    <th>Судебный пристав-исполнитель</th>
-                </tr>
-            </thead>
-            <tbody id='tbody'></tbody>
+    <div class="table">
+        <table border="1" width="100%" cellpadding="5">
+            <tr>
+                <th id="text01">Магия/Резонанс:</th>
+                <th id="text02">Магические/Резонансные Умения:</th>
+                <th id="text03">Рейтинг умений:</th>
+                <th id="text04">Группа умений:</th>
+                <th id="text05">Заклинания/Комплексные формы:</th>
+            </tr>
+            <tr>
+                <td id="text1">0</td>
+                <td id="text2">0</td>
+                <td id="text3">0</td>
+                <td id="text4">0</td>
+                <td id="text5">0</td>
+            </tr>
         </table>
     </div>
+    <div class="countUm">
+        <lable>Очки атрибутов:</lable>
+        <lable id="countUm">14</lable>
+    </div>
+    <div class="box" id="box1">
+        <div class="har" id="har1">
+            <label for="qty1"><abbr title="Quantity">Тело</abbr></label>
+            <input id="qty1" value="0/7" disabled/>
+            <button id="down1" onclick="modify_qty(-1,'qty1')">-1</button>
+            <button id="up1" onclick="modify_qty(1,'qty1')">+1</button>
+        </div>
+        <div class="har" id="har2">
+            <label for="qty2"><abbr title="Quantity">Ловкость</abbr></label>
+            <input id="qty2" value="0/5" disabled/>
+            <button id="down2" onclick="modify_qty(-1, 'qty2')">-1</button>
+            <button id="up2" onclick="modify_qty(1,'qty2')">+1</button>
+        </div>
+        <div class="har" id="har3">
+            <label for="qty3"><abbr title="Quantity">Раекция</abbr></label>
+            <input id="qty3" value="0/7" disabled/>
+            <button id="down3" onclick="modify_qty(-1,'qty3')">-1</button>
+            <button id="up3" onclick="modify_qty(1,'qty3')">+1</button>
+        </div>
+        <div class="har" id="har4">
+            <label for="qty4"><abbr title="Quantity">Сила</abbr></label>
+            <input id="qty4" value="0/5" disabled/>
+            <button id="down4" onclick="modify_qty(-1, 'qty4')">-1</button>
+            <button id="up4" onclick="modify_qty(1,'qty4')">+1</button>
+        </div>
+        <div class="har" id="har5">
+            <label for="qty5"><abbr title="Quantity">Сила воли</select></abbr></abbr></label>
+            <input id="qty5" value="0/7" disabled/>
+            <button id="down5" onclick="modify_qty(-1,'qty5')">-1</button>
+            <button id="up5" onclick="modify_qty(1,'qty5')">+1</button>
+        </div>
+        <div class="har" id="har6">
+            <label for="qty6"><abbr title="Quantity">Логика</abbr></label>
+            <input id="qty6" value="0/5" disabled/>
+            <button id="down6" onclick="modify_qty(-1, 'qty6')">-1</button>
+            <button id="up6" onclick="modify_qty(1,'qty6')">+1</button>
+        </div>
+        <div class="har" id="har7">
+            <label for="qty7"><abbr title="Quantity">Интуиция</abbr></label>
+            <input id="qty7" value="0/7" disabled/>
+            <button id="down7" onclick="modify_qty(-1,'qty7')">-1</button>
+            <button id="up7" onclick="modify_qty(1,'qty7')">+1</button>
+        </div>
+        <div class="har" id="har8">
+            <label for="qty8"><abbr title="Quantity">Харизма</abbr></label>
+            <input id="qty8" value="0/5" disabled/>
+            <button id="down8" onclick="modify_qty(-1, 'qty8')">-1</button>
+            <button id="up8" onclick="modify_qty(1,'qty8')">+1</button>
+        </div>
+        <div class="har" id="har8">
+            <label for="qtyIni"><abbr title="Quantity">Инициатива</abbr></label>
+            <input id="qtyIni" value="2" disabled/>
+        </div>
+    </div>
+    <div class="countUm">
+        <lable font-size="25px"><br>Спец атрибуты:</lable>
+        <lable id="countSpec">1</lable>
+    </div>
+    <div class="box" id="box1">
+        <div class="har" id="har9">
+            <label for="qty9"><abbr title="Quantity">Грань</abbr></label>
+            <input id="qty9" value="0/5" disabled/>
+            <button id="down9" onclick="modify_qty(-1, 'qty9')">-1</button>
+            <button id="up9" onclick="modify_qty(1,'qty9')">+1</button>
+        </div>
+        <div class="har" id="har10">
+            <label for="qty10"><abbr title="Quantity">Магия</abbr></label>
+            <input id="qty10" value="0/0" disabled/>
+            <button id="down10" onclick="modify_qty(-1, 'qty10')">-1</button>
+            <button id="up10" onclick="modify_qty(1,'qty10')">+1</button>
+        </div>
+        <div class="har" id="har11">
+            <label for="qty11"><abbr title="Quantity">Резонанс</abbr></label>
+            <input id="qty11" value="0/0" disabled/>
+            <button id="down11" onclick="modify_qty(-1, 'qty11')">-1</button>
+            <button id="up11" onclick="modify_qty(1,'qty11')">+1</button>
+        </div>
+    </div>
+    <div>
+      <table border="0" width="30%" cellpadding="5" >
+        <tbody>
+        <tr>
+          <td align="left">
+            <input class="countUm2" title="Карма должна быть больше, либо равна нулю" value="Карма:" disabled/>
+          </td>
+          <td width="60px">
+            <input class="countUm2" id="countKach" title="Карма должна быть больше, либо равна нулю" value="25" disabled/>
+          </td>
+        </tr>
+        <tr>
+          <td >
+            <input class="countUm2" value="Положительные:" disabled/>
+            </td>
+          <td width="60px">
+            <input class="countUm2" id="plusCarma" value="0" disabled/>
+          </td>
+          </tr>
+          <tr>
+          <td>
+            <input class="countUm2" value="Отрицательные:" disabled/>
+            </td>
+          <td width="60px">
+            <input class="countUm2" id="minusCarma" value="0" disabled/>
+          </td>
+        </tr>
+          </tbody>
+      </table>
+    </div>
+    <div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win')" type="button">Положительные качества</button>
+        <dl class="plusKachestva" id="plusKachestva">
+            <dt>Тут будут положительные качества.</dt>
+        </dl>
+    </div>
+    <div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win2')" type="button">Отрицательные качества</button>
+        <dl class="plusKachestva" id="minusKachestva">
+            <dt>Тут будут отрицательные качества.</dt>
+        </dl>
+    </div>
+    <div id="win" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Положительные качества тратят карму">
+                <div>Положительные качества</div>
+            </h2>
+            <div class="content" id="contentPlusKach">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Качество
+                                </td>
+                                <td class="karmZn">
+                                    Карма
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="pk1" title="Персонаж-амбидекстр одинаково хорошо манипулирует предметами любой рукой. Без этого качества все действия совершаемые только левой рукой (в том числе стрельба) получают штраф -2 к набору кубиков">Амбидекстр</td>
+                              <td><input id="pkv1" class="karmZn" value="4" disabled></td>
+                                <td id="pkb1"><button class="onoff" onclick="onoff('pk1','pkv1', this, '1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk2" title="Это качество даёт персонажу +2 к набору кубиков на всех проверках Логики. Так же это качество уменьшает нужное для поиска время в два раза.">Аналитический ум</td>
+                                <td><input id="pkv2" class="karmZn" value="5" disabled></td>
+                                <td id="pkb2"><button class="onoff" onclick="onoff('pk2','pkv2',this, '1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk3" title="Астральная подпись (АП) персонажа сливается с фоном, что делает её сложной для обнаружения. Все АП оставленные персонажем существуют вдвое меньше. Любые попытки считать АП этого персонажа получают штраф -2 к набору кубиков для проверки Чувствования. 
+Только для персонажей с магией и способностью оставлять АП.">Астральный хамелион</td>
+                                <td><input id="pkv3" class="karmZn" value="10" disabled></td>
+                                <td id="pkb3"><button class="onoff" onclick="onoff('pk3','pkv3',this, '1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk4" title="Персонаж с этим качеством свободно пишет и читает на 2-х языках. Выберите персонажу второй бесплатный язык.">Билингв</td>
+                                <td><input id="pkv4" class="karmZn" value="5" disabled></td>
+                                <td id="pkb4"><button class="onoff" onclick="onoff('pk4','pkv4',this, '1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk5" title="Это качество позволяет персонажу настроиться на духов одного типа. Такие духи сколнны помогать персонажу, нападают неохотно, используют несмертельные способности. Не действует на часовых, приспешников. Дает 1 доп.службу духа, модификатор проверок Вызывания +1.">Близость к духам</td>
+                                <td><input id="pkv5" class="karmZn" value="7" disabled></td>
+                                <td id="pkb5"><button class="onoff" onclick="onoff('pk5','pkv5',this, '1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk6" title="Персонаж с этим качеством получает бонус +2 к набору кубиков при всех проверках Лечения направленных на него, а так же магическом лечении.">Быстрое исцеление</td>
+                                <td><input id="pkv6" class="karmZn" value="3" disabled></td>
+                                <td id="pkb6"><button class="onoff" onclick="onoff('pk6','pkv6',this, '1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk7" title="За каждую единицу рейтинга качества персонаж получает одну доп.клетку Блока Переполнения Повреждений. Позволяют персонажу вынести больше повреждений перед смертью. Не поднимают порог перед впадением в беспамятство, не влияют на получаемые персонажем модификаторы повреждений.">Воля к жизни</td>
+                              <td><input id="pkv7" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(3):</td><td width="20%"><div><input id="pkv71" class="karmZn" value="3" type="radio" name="chGroup1" checked></div></td></tr>
+                              <tr><td>Рейтинг 2(6):</td><td><input id="pkv72" class="karmZn" value="6" type="radio" name="chGroup1"></td></tr>
+                              <tr><td>Рейтинг 3(9):</td><td><input id="pkv73" class="karmZn" value="9" type="radio" name="chGroup1"></td></tr></table>
+                                      </td>
+                                    
+                                <td id="pkb7"><button class="onoff" onclick="radiobutCheck('pk7','pkv7',this,'chGroup1')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk8" title="За каждую единицу рейтинга качества при расчете модификаторов ран персонаж игнорирует одну клетку повреждений. Не может быть использовано адептом с силой Сопротивление боли или биовером компенсатор повреждений.">Высокая болевая устойчивость</td>
+                              <td><input id="pkv8" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(7):</td><td width="20%"><input id="pkv81" class="karmZn" value="7" type="radio" name="chGroup2" checked></td></tr>
+                              <tr><td>Рейтинг 2(14):</td><td><input id="pkv82" class="karmZn" value="14" type="radio" name="chGroup2"></td></tr>
+                              <tr><td>Рейтинг 3(21):</td><td><input id="pkv83" class="karmZn" value="21" type="radio" name="chGroup2"></td></tr></table>
+                                      </td>
+                                 <td id="pkb8"><button class="onoff" onclick="radiobutCheck('pk8','pkv8',this,'chGroup2')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="pk9" title="Персонаж с этим качеством имеет поразительно гибкие суставы. Персонаж получает бонус +2 к набору кубиков при проверке исскуства побега, может протиснуться в тесные и маленькие пространства, имеет успех в барах и на вечеринках.">Гуттаперчивый</td>
+                                <td><input id="pkv9" class="karmZn" value="6"  disabled></td>
+                                <td id="pkb9"><button class="onoff" onclick="onoff('pk9','pkv9',this, '1')"><div>off</div></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="pk10" title="Наставник означает, что персонаж связан с духомпокровителем наставляющим его в магических практиках и обеспечивающим определёнными преимуществами и неудобствами. Персонаж может сменить духа-наставника, но одномоментно у него может быть не более одного духа-наставника. Для смены духа-наставника персонаж сначала должен купить это качество, как если бы оно было Отрицательным. Затем он может приобрести это качество снова, с другим духом-наставником. Цена качества представляет собой пошлину за развод с одним духом и заключение союза с другим. Это качество доступно только персонажам имеющим рейтинг атрибута Магия.">Дух-Наставник</td>
+                                <td><input id="pkv10" class="karmZn" value="5" disabled></td>
+                                <td id="pkb10"><button class="onoff" onclick="onoff('pk10','pkv10',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk11" title="Персонаж с Естественным Иммунитетом имеет врождённый и выработанный иммунитет к одной болезни или токсину. Это качество доступно в двух вариантах. Вариант за 4 очка Кармы даёт иммунитет к одному природному токсину или болезни. Если же приобретается вариант за 10 очков, иммунитет действует против одного синтетического (искусственно созданного) токсина или болезни. Естественный Иммунитет не работает против заболеваний и токсинов имеющих магическую природу, таких как ВВЧМЧ. Игрок и МИ должны решить, к какой болезни, наркотику или яду у персонажа иммунитет. В течении шести часов персонаж может принять одну дозу препарата или яда без получения каких либо негативных эффектов. Любая последующая доза или воздействие наносит обычный урон, но время восстановления персонажа уменьшается вдвое. Обратите внимание, персонаж имеющий Естественный Иммунитет может служить переносчиком болезни и заражать других персонажей, просто он сам от болезни не страдает.">Естественный Иммунитет</td>
+                                <td><input id="pkv11" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Природный(4):</td><td width="20%"><input id="pkv111" class="karmZn" value="4" type="radio" name="chGroup3" checked></td></tr>
+                              <tr><td>Синтетический(10):</td><td><input id="pkv112" class="karmZn" value="10" type="radio" name="chGroup3"></td></tr></table>
+                                      </td>
+                                 <td id="pkb11"><button class="onoff" onclick="radiobutCheck('pk11','pkv11',this,'chGroup3')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk12" title="Исключительный Атрибут поможет создать харизматического тролля или проворного гнома. Это качество позволяет поднять один атрибут на единицу выше максимума для метатипа. Например, персонаж-орк с Исключительным Атрибутом для Силы может поднять до её 10 (перед применением аугментаций) вместо нормального лимита в 9. Исключительный Атрибут можно применить к Специальному атрибуту, т.е. Магии или Резонансу. Грань нельзя увеличить Исключительным Атрибутом (она усиливается другим качеством — Счастливчик). Персонаж может взять Исключительный Атрибут только один раз и только с согласия МИ.">Исключительный Атрибут</td>
+                                <td><input id="pkv12" class="karmZn" value="14" disabled></td>
+                                <td id="pkb12"><button class="onoff" onclick="onoff('pk12','pkv12',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk13" title="Нули и единицы — родной язык Кодсингера. Персонаж весьма опытен в совершении одного действия в Матрице (выбираемого в момент получения этого качества) и получает +2 кубика к набору кубиков при его проверке. Это качество может быть выбрано только для Матричного действия (см. стр. 256) и использоваться в связанной с ними проверке.">Кодсингер</td>
+                                <td><input id="pkv13" class="karmZn" value="10" disabled></td>
+                                <td id="pkb13"><button class="onoff" onclick="onoff('pk13','pkv13',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk14" title="Персонаж с качеством Котоподобный одарён поразительной элегантностью, тихой походкой и почти сверхъестественной способностью двигаться беззвучно. Также он утверждает что всегда приземляется на ноги, но проверять не даёт. Это качество добавляет +2 кубика к броскам на проверки умения Скрытность.">Котоподобный</td>
+                                <td><input id="pkv14" class="karmZn" value="7" disabled></td>
+                                <td id="pkb14"><button class="onoff" onclick="onoff('pk14','pkv14',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk15" title="Эта замечательная особенность потенциально способна отправить Огнешар отправителю. За каждые 6 очков Кармы персонаж получает 1 дополнительный кубик для проверок Сопротивления Заклинанию. Однако, Магическое Сопротивление всегда включено, вы не можете снизить его при получении полезных заклинаний, таких как Исцеление. Также персонаж с этим качеством не может принимать участие в заклинаниях, требующих добровольного согласия, такие заклинания на таком персонаже автоматически не удаются. Персонаж с рейтингом Магии не может получить это качество.">Магическое Сопротивление</td>
+                                <td><input id="pkv15" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(6):</td><td width="20%"><input id="pkv151" class="karmZn" value="6" type="radio" name="magSopr" checked></td></tr>
+                              <tr><td>Рейтинг 2(12):</td><td><input id="pkv152" class="karmZn" value="12" type="radio" name="magSopr"></td></tr>
+                              <tr><td>Рейтинг 3(18):</td><td><input id="pkv153" class="karmZn" value="18" type="radio" name="magSopr"></td></tr>
+                              <tr><td>Рейтинг 4(24):</td><td><input id="pkv153" class="karmZn" value="24" type="radio" name="magSopr"></td></tr></table>
+                                      </td>
+                                 <td id="pkb15"><button class="onoff" onclick="radiobutCheck('pk15','pkv15',this,'magSopr')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk16" title="Это качество даёт персонажу интуитивное понимание внутреннего устройства и основных принципов работы механических и электронных устройств. Он знает как починить сломанное, повысить эффективность устройства или использовать его совсем не по назначению. Персонажи с качеством На Скорую Руку получают бонус +2 к набору кубиков проверки Механики при разгоне снаряжения. Если МИ решает, что желаемое персонажем действие в принципе возможно, он устанавливает порог используя таблицу Создания/ Ремонта (стр. 153), но снижает его на 1. И хотя успешный разгон снаряжения позволяет персонажу совершать удивительные технические трюки, все они носят временный характер.">На скорую руку</td>
+                                <td><input id="pkv16" class="karmZn" value="10" disabled></td>
+                                <td id="pkb16"><button class="onoff" onclick="onoff('pk16','pkv16',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk17" title="Возможности тела и разума ограничены, но воля некоторых столь сильна, что раздвигает эти рамки. За каждый рейтинг Непреклонного персонаж увеличивает один из своих врождённых пределов (Ментальный, Физический или Социальный) по своему выбору на +1. Каждый из трёх возможных рейтингов можно применить к любому пределу по выбору игрока (например, +3 к одному пределу, +2 к одному и +1 к другому, либо по +1 к каждому).">Непреклонный</td>
+                                <td><input id="pkv17" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(8):</td><td width="20%"><input id="pkv171" class="karmZn" value="8" type="radio" name="nepreklonniy" checked></td></tr>
+                              <tr><td>Рейтинг 2(16):</td><td><input id="pkv172" class="karmZn" value="16" type="radio" name="nepreklonniy"></td></tr>
+                              <tr><td>Рейтинг 3(24):</td><td><input id="pkv173" class="karmZn" value="24" type="radio" name="nepreklonniy"></td></tr></table>
+                                      </td>
+                                 <td id="pkb17"><button class="onoff" onclick="radiobutCheck('pk17','pkv17',this,'nepreklonniy')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk18" title="Этот персонаж смешивается с толпой, его редко замечают и быстрозабывают. Внешность его непримечательна решительно во всех аспектах. Любой пытающийся описать этого персонажа лишь выдавит из себя «обычный рост, обычное телосложение, обычные волосы и т.д.». Для тех кто пытается вспомнить детали внешности персонажа увеличьте порог на 1. Это приводит к тому, что Средняя проверка Памяти (порог 2) становиться Трудной (порог 3). Любой кто попытается обнаружить или выследить персонажа с качеством Непримечательность в населённой местности получает штраф -2 к набору кубиков на всех проверках поиска. Такой же штраф полагается при попытках спрашивать о персонаже зная только его внешность. Этот модификатор, однако, не применяется к поискам магией или в Матрице. Если персонаж каким либо видимым образом получает татуировки, шрамы, очевидный кибервэр или другие приметы, преимущества Непримечательности теряются до тех пор, пока приметы не будут удалены.">Неприметность</td>
+                                <td><input id="pkv18" class="karmZn" value="8" disabled></td>
+                                <td id="pkb18"><button class="onoff" onclick="onoff('pk18','pkv18',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk19" title="Это качество поможет вам стать лучше, чем лучший в мире. Обычно лимитом умения является 12. Но иногда появляется персонаж, выходящий за эти ограничения и проявляющий исключительное мастерство в конкретном умении. С этим качеством одно умение персонажа может быть поднято до 7 при создании персонажа, а в конечном итоге можно поднять его до рейтинга 13. Персонаж может взять качество Одарённый только один раз.">Одарённый</td>
+                                <td><input id="pkv19" class="karmZn" value="14" disabled></td>
+                                <td id="pkb19"><button class="onoff" onclick="onoff('pk19','pkv19',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk20" title="Когда на вызов является дух-жук с мокрыми мандибулами, персонаж с качеством Отважный скорее всего останется стоять и сражаться, а не бежать, сверкая пятками. Это качество даёт персонажу бонус +2 к набору кубиков при сопротивлении страху и запугиванию, в том числе стражу вызванному магией или силами тварей.">Отважный</td>
+                                <td><input id="pkv20" class="karmZn" value="10" disabled></td>
+                                <td id="pkb20"><button class="onoff" onclick="onoff('pk20','pkv20',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk21" title="Это качество позволяет персонажу с лёгкостью осваиваться в новых условиях, ситуациях, организациях и заданиях. Проникновение в банду, установление контактов в новом городе или получение приглашения на частную вечеринку, персонаж во всех подобных ситуациях получает временный бонус +2 к набору кубиков для соответствующих социальных проверок Переговоров и Обмана при первой встрече. Этот модификатор не распространяется на вторую и последующие встречи.">Первое Впечатление</td>
+                                <td><input id="pkv21" class="karmZn" value="11" disabled></td>
+                                <td id="pkb21"><button class="onoff" onclick="onoff('pk21','pkv21',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk22" title="Имеющий это качество персонаж-метачеловек может сойти за человека в большинстве случаев. При проведении проверок Социальных умений (см. стр. 143) НИПы-люди будут относиться к такому человеку нейтрально, даже те, кто не любит металюдей. Персонаж может ощущать враждебность со стороны тех НИПметалюдей, которые предвзято относятся к людям и приняли его за человека или не доверяют тем, кто выдаёт себя за человека. Качество Похожий на Человека могут взять только эльфы, гномы и орки.">Похожий на Человека</td>
+                                <td><input id="pkv22" class="karmZn" value="6" disabled></td>
+                                <td id="pkb22"><button class="onoff" onclick="onoff('pk22','pkv22',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk23" title="Это качество делает нейроструктуру персонажа более стойкой к отдаче. Это даёт ему 1 очко природной фильтрации биоотдачи, которая складывается с программой Фильтр Биоотдачи или Брандмауэром техноманта (см. стр. 247).">Природная Закалка</td>
+                                <td><input id="pkv23" class="karmZn" value="10" disabled></td>
+                                <td id="pkb23"><button class="onoff" onclick="onoff('pk23','pkv23',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk24" title="Персонаж с этим качеством обладает врождённым сочетанием физической формы, пространственного воображения и природными способностями к гимнастике или атлетике. Хотя персонаж может и не быть спортсменом мирового класса, а для максимальной эффективности его таланты могут потребовать огранки, для своего веса и размера он в отличной физической форме. Прирождённый Атлет даёт бонус +2 к набору кубиков при проверках умений Бег и Гимнастика.">Прирождённый Атлет</td>
+                                <td><input id="pkv24" class="karmZn" value="7" disabled></td>
+                                <td id="pkb24"><button class="onoff" onclick="onoff('pk24','pkv24',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk25" title="Когда приходит время жать на газ и двигать, вам нужен Резкий Водила. Он прирождённый водитель или пилот. Когда он сидит за баранкой/штурвалом/джойстиком он возможностей, а потому способен выжать из них всё. Во время поездки или погони Резкий Водила может увеличить Скорость своей машины на 20% или модификатор Управляемости на +1 (по выбору игрока). Также он получает бонус +2 к набору кубиков при совершении сложных манёвров или трюков при управлении машиной. Этот бонус длится 1к6 минут.Игрок может, если захочет, продлить этот бонус на дополнительные 1к6 минут. Это подвергает машину или дрон перегрузкам далеко за пределами проектных, и чревато катастрофическими повреждениями. За каждую минуту воздействия на машину бонуса в прошлом периоде активации, машина автоматически получает одну единицу стрессового урона (без возможности его отмены).">Резкий Водила</td>
+                                <td><input id="pkv25" class="karmZn" value="11" disabled></td>
+                                <td id="pkb25"><button class="onoff" onclick="onoff('pk25','pkv25',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk26" title="Если персонаж знает окрестности — кратчайшие пути, укрытия и надёжных людей - лучше чем кто-либо другой, то скорее всего у него есть качество Родная Земля. Он знает живущие здесь семьи, их историю и чем заняты переехавшие отсюда дети, он знает улицы лучше чем ГридГайд, знает то, что никогда не будет в базе ГридГайд и случаи, когда ГридГайд неправ. Он знает политику банд, кто на кого и против кого работает. Но его познания могут относиться не только к физическим улицам. В зависимости от персонажа его Родная Земля может проявляться в различных формах.">Родная Земля</td>
+                                <td><input id="pkv26" class="karmZn" value="10" disabled></td>
+                                <td id="pkb26"><button class="onoff" onclick="onoff('pk26','pkv26',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk27" title="Техноманты и пользователи магии имеющие качество Сосредоточенная Концентрация управляют своими дисциплинами куда точнее чем остальные. Эта точность снижает нагрузку на тело техноманта или пользователя магии. Он способен поддерживать одно заклинание/комплексную форму с силой/уровнем его рейтинга Сосредоточенной Концентрации без получения штрафа. Например, пользователь магии с Сосредоточенной Концентрацией рейтинга 3 может поддержать заклинание Броня Мощью 3 не получая никаких негативных модификаторов к набору кубиков при поддержании заклинания. Поддержание любого дополнительного заклинания или комплексной формы накладывает обычный штраф -2 к набору кубиков на поддержание за каждое поддерживаемое заклинание или комплексную форму. Это качество может быть взято только творящими заклинания пользователями магии или техномантами.">Сосредоточенная Концентрация</td>
+                                <td><input id="pkv27" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(4):</td><td width="20%"><input id="pkv271" class="karmZn" value="4" type="radio" name="sosredotoch" checked></td></tr>
+                              <tr><td>Рейтинг 2(8):</td><td><input id="pkv272" class="karmZn" value="8" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 3(12):</td><td><input id="pkv273" class="karmZn" value="12" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 4(16):</td><td><input id="pkv274" class="karmZn" value="16" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 5(20):</td><td><input id="pkv275" class="karmZn" value="20" type="radio" name="sosredotoch"></td></tr>
+                              <tr><td>Рейтинг 6(24):</td><td><input id="pkv276" class="karmZn" value="24" type="radio" name="sosredotoch"></td></tr></table>
+                                      </td>
+                                 <td id="pkb27"><button class="onoff" onclick="radiobutCheck('pk27','pkv27',this,'sosredotoch')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk28" title="Обладающие этим качеством персонажи легче остальных переносят повреждения. Персонаж получает +1 к набору кубиков Тела при проверках Сопротивление Повреждениям.">Стойкость</td>
+                                <td><input id="pkv28" class="karmZn" value="9" disabled></td>
+                                <td id="pkb28"><button class="onoff" onclick="onoff('pk28','pkv28',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk29" title="Броски костей и монет чаще всего играют за персонажа, заставляя челюсти окружающих падать от изумления. Качество Счастливчик позволяет персонажу поднять значение атрибута Грань на единицу выше максимального для его метатипа (например, персонажчеловек может поднять Грань до 8). Обратите внимание, получение этого качества не поднимает фактическоезначение Грани, на это нужно дополнительно  потратить Карму. Это качество может быть получено только один раз и только после одобрения МИ. Качество Счастливчик не комбинируется с Исключительным Атрибутом.">Счастливчик</td>
+                                <td><input id="pkv29" class="karmZn" value="12" disabled></td>
+                                <td id="pkb29"><button class="onoff" onclick="onoff('pk29','pkv29',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                 <td id="pk30" title="Персонаж с этим качеством легче справляется с болезнями и токсинами чем другие персонажи и получает бонус +1 к набору кубиков при проверках Сопротивления. Это качество бывает двух уровней: за 4 очка Кармы персонаж устойчив или только к токсинам или только к патогенам. Если же персонаж потратил на это качество 8 очков, он получает бонус +1 к противодействию обоим.">Устойчивость к патогенам/токсинам</td>
+                                <td><input id="pkv30" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                            <tr>
+								<td>
+									Патоген(4):
+								</td>
+								<td width="20%">
+									<input id="pkv301" class="karmZn" value="4" type="radio" name="ustoichPT" checked>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									Токсин(8):
+								</td>
+								<td>
+									<input id="pkv302" class="karmZn" value="8" type="radio" name="ustoichPT">
+								</td>
+							</tr>
+							</table>
+                                      </td>
+                                 <td id="pkb30"><button class="onoff" onclick="radiobutCheck('pk30','pkv30',this,'ustoichPT')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="pk31" title="Персонаж с этим качеством может мгновенно вспоминать факты, даты, цифры и всё прочее что он когда либо видел или слышал. Персонаж получает бонус +2 к набору кубиков при всех проверках Памяти.">Фотографическая память</td>
+                                <td><input id="pkv31" class="karmZn" value="6" disabled></td>
+                                <td id="pkb31"><button class="onoff" onclick="onoff('pk31','pkv31',this, '1')"><div>off</div></button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onClick="closeKachBut('plusKachestva', 'win')">закрыть</button>
+        </div>
+    </div>
+    <div id="win2" style="display:none;">
+         <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Отрицательные качества добавляют карму">
+                <div>Отрицательные качества</div>
+            </h2>
+            <div class="content" id="contentPlusKach">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Качество
+                                </td>
+                                <td class="karmZn">
+                                    Карма
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="mk1" title="Персонаж с этим качеством подвержен аллергии на некие вещества или состояние среды. Вес этого качества зависит от двух факторов. Первый, редкость вещества или условия, он может быть Редким (2 очка Кармы) или Распространённым (7 очков Кармы). Второй, определяет тяжесть симптомов: Слабая (3 очка Кармы), Умеренная (8 очка Кармы), Серьёзная (13 очка Кармы) или Крайняя (18 очка Кармы). Для получения окончательного значения качества сложите значения факторов. Например, Редкая Умеренная Аллергия (Серебро) принесёт 10 очков Кармы (2+8). Если персонаж атакован с веществом на которое у него аллергия, он теряет по 1 кубику на проверку Сопротивления на ступень тяжести аллергии (то есть 1 кубик для Слабой аллергии, 2 кубика при Умеренной и так далее)">Аллергия</td>
+                              <td><input id="mkv1" class="karmZn" value="0" hidden>
+								<table class="karmZn" border="0">
+									
+										<tr>
+											<td name="mkv011" title="Вещество или условия редко встречаются в местной окружающей среде. Например: серебро, золото, антибиотики, трава.">
+												Редкая(2):
+											</td>
+											<td width="20%">
+												<input id="mkv011" class="karmZn" value="-2" type="radio" name="allergiya1" checked>
+											</td>
+										</tr>
+										<tr>
+											<td name="mkv012" title="Вещество или условия широко распространено в местной окружающей среде. Например: солнечный свет, морепродукты, пчёлы, пыльца, примеси, Wi-Fi, соя, пшеница">
+												Распространенная(8):
+											</td>
+											<td>
+												<input id="mkv012" class="karmZn" value="-8" type="radio" name="allergiya1">
+											</td>
+										</tr>
+										<tr>
+												<td name="mkv021" title="Симптомы раздражают и отвлекают. Находящийся под воздействием эффектов аллергии персонаж получает -2 к набору кубиков всех Физических проверках">
+													Слабая(3):
+												</td>
+												<td>
+													<input id="mkv021" class="karmZn" value="-3" type="radio" name="allergiya2" checked>
+												</td>
+											</tr>
+											<tr>
+												<td name="mkv022" title="Контакт с аллергеном вызывает сильную боль. Пока персонаж испытывает симптомы, он получает -2 к набору кубиков всех Физических проверках">
+													Умеренная(8):
+												</td>
+												<td>
+													<input id="mkv022" class="karmZn" value="-8" type="radio" name="allergiya2">
+												</td>
+											</tr>
+											<tr>
+												<td name="mkv023" title="Контакт вызывает не только сильную боль, но и настоящие повреждения. Пока персонаж испытывает симптомы, он получает -4 к набору кубиков всех проверок. Также персонаж получает 1 клетку Физического урона (без возможности сопротивления) за 1 минуту действия аллергии.">
+													Серьезная(13):
+												</td>
+												<td width="20%">
+													<input id="mkv023" class="karmZn" value="-13" type="radio" name="allergiya2">
+												</td>
+											</tr>
+											<tr>
+												<td name="mkv024" title="При воздействии аллергена персонаж впадает в анафилактический шок. Персонаж получает модификатор набора кубиков -6 на все свои действия. Персонаж считается находящимся в мучительной агонии. Также персонаж получает 1 клетку Физического урона (без возможности сопротивления) за 30 секунд контакта с аллергеном. Против урона от анафилактического шока может помочь Первая Помощь, Медицина или магия">
+													Крайняя(18):
+												</td>
+												<td>
+													<input id="mkv024" class="karmZn" value="-18" type="radio" name="allergiya2">
+												</td>
+											</tr>
+								</table>
+                                      </td>
+                                    
+                                <td id="mkb1"><button class="onoff" onclick="radioCheck2('mk1','mkv1',this,'allergiya1','allergiya2')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk2" title="Астральная подпись персонажа с качеством Астральный Маяк ну типа хорошо заметна в астрале. Подпись держится вдвое дольше чем обычно, а попытки собрать информацию о ней получают -1 к порогу проверок Чувствования. Это качество могут взять только персонажи с рейтингом Магия.">Астральный Маяк</td>
+                                <td><input id="mkv2" class="karmZn" value="-10" disabled></td>
+                                <td id="mkb2"><button class="onoff" onclick="onoff('mk2','mkv2',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk3" title="Персонаж с этим качеством с трудом засыпает и редко высыпается. Обычно это лишь раздражает. Однако, для бегущего это может стать серьёзной проблемой, поскольку для него важно отдыхать при каждом удобном случае, восстанавливая энергию. Также Бессонница увеличивает время восстановления от Оглушающего урона.">Бессонница</td>
+                                
+								<td><input id="mkv3" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td title="За 10 очков, перед совершением броска Тело+Сила Воли для восстановления от Оглушающего урона совершите проверку Интуиции+ Сила Воли (4). В случае успеха, персонаж не подвержен Бессоннице и восстанавливает Оглушающий урон как обычно. Кроме того он восстанавливает свою Грань после 8-и часов спокойного сна. В случае провала, удвойте нормальное время восстановления от Оглушающего урона. Таким образом восстановление некоего числа клеток Оглушающего урона занимает не один час за бросок, а два. Также если персонаж находится под воздействием Бессонницы он не восстанавливает свою Грань и не сможет сделать это ещё 24 часа.">Слабая(10):</td><td width="20%"><div><input id="mkv31" class="karmZn" value="-10" type="radio" name="besson" checked></div></td></tr>
+                              <tr><td title="За 15 очков, провал проверки Интуиции+ Сила Воли (4) приводит к тому, что все усилия по восстановлению от Оглушающего урона отдыхом потерпели неудачу, и персонаж должен повторить попытку позже. Поскольку персонаж мучается бессонницей Оглушающий урон не снимается, а сам персонаж должен ждать восстановления Грани 24 часа.">Сильная(15):</td><td><input id="mkv32" class="karmZn" value="-15" type="radio" name="besson"></td></tr>
+								</table>
+                                <td id="mkb3"><button class="onoff" onclick="radiobutCheck('mk3','mkv3',this,'besson')"><div>off</div></button></td>
+                            </tr>
+                            <tr>
+                                <td id="mk4" title="Персонаж с этим качеством по настоящему бесит духов одного типа (см. стр. 329). Причинял ли персонаж вред таким духам или что-то в его ауре приводит их в ярость, но духи определённого при получении качества Бич Духов типа скорое всего нападут на персонажа если смогут, и постараются не повиноваться ему и не выполнять просьбы его или его друзей. Если духам этого типа приказали атаковать партию с этим персонажем, они сначала попытаются отделить его от остальных и уничтожить. Против персонажа с качеством Бич Духов духи выбранного типа всегда будут использовать смертельные силы. Если персонаж с таким качеством попытается вызвать или связать такого духа, персонаж получит штраф к набору кубиков -2 при проверке попытки. Если же призыватель пытается изгнать духа этого типа, дух получает бонус +2 к набору кубиков при проверке сопротивления изгнанию. Не действует на часовых и приспешников. Это качество может быть взято только использующими магию.">Бич духов</td>
+                                <td><input id="mkv4" class="karmZn" value="-7" disabled></td>
+                                <td id="mkb4"><button class="onoff" onclick="onoff('mk4','mkv4',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk5" title="Персонаж замирает в бою. При первой проверке Инициативы персонаж уменьшает своё Значение Инициативы на этот ход вдвое (с округлением вверх). В последующих фазах персонаж использует свою нормальную инициативу. Также Боевой Паралич накладывает на персонажа штраф -2 к набору кубиков проверки Внезапности. Если же персонаж должен совершить проверку Самообладания находясь под огнём или в иной боевой обстановке, МИ поднимает порог на +1.">Боевой Паралич</td>
+                                <td><input id="mkv5" class="karmZn" value="-12" disabled></td>
+                                <td id="mkb5"><button class="onoff" onclick="onoff('mk5','mkv5',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk6" title="Выжженный персонаж имеет неврологические проблемы вызванные уроном от Чёрного Льда, Психотропного Льда или ЛЖи. Повреждение может проявляться в краткой и долгосрочной потери памяти, внезапном провале памяти, частых мигренях, ослаблении чувств (зрения, осязания, обоняния и т.д.), и аффективных расстройствах, таких как паранойя и тревога. Игрок выбирает один эффект Выраженности, который должен быть достаточно существенным для создания персонажу помех. Всякий раз когда персонаж входит в ВР или вставляет ЛОЖь, он должен совершить проверку Тело+Сила Воли (4). При провале, персонаж испытывает выбранный эффект в течении шести часов. Глюк или критический глюк на этой проверке приводит к тому-же эффекту, но длительностью 24 часа. Избавиться от качества Выжженный можно получив медицинскую помощь, а затем потратить Карму на избавление от Отрицательного качества. При столкновении с этими угрозами персонаж должен пройти проверку Силы Воли (3) или подвергнуться панике. Если он смог противостоять вызвавшему Выжигание Льду персонаж получает -2 к проверке Сопротивления Повреждению от этих программ.">Выжженный</td>
+                                <td><input id="mkv6" class="karmZn" value="-10" disabled></td>
+                                <td id="mkb6"><button class="onoff" onclick="onoff('mk6','mkv6',this, '1')"><div>off</div></button></td>
+                            </tr>
+                          <tr>
+                                <td id="mk7" title="Персонаж с этим качеством не ладит с технологиями. Устройства необъяснимо ломаются, программы падают, машины не заводятся. Каждый раз когда персонаж пытается использовать сравнительно сложное устройство, за каждую единицу качества сокращается необходимое количество единиц для глюка на одну. Все что персонаж пытается испортить с помощью этого качества - работает безупречно. Не влияет на биовер и кибервер и др. импланты.">Гремлины</td>
+                                <td><input id="mkv7" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1(4):</td><td width="20%"><input id="mkv71" class="karmZn" value="-4" type="radio" name="gremlini" checked></td></tr>
+                              <tr><td>Рейтинг 2(8):</td><td><input id="mkv72" class="karmZn" value="-8" type="radio" name="gremlini"></td></tr>
+                              <tr><td>Рейтинг 3(12):</td><td><input id="mkv73" class="karmZn" value="-12" type="radio" name="gremlini"></td></tr>
+                              <tr><td>Рейтинг 4(16):</td><td><input id="mkv74" class="karmZn" value="-16" type="radio" name="gremlini"></td></tr></table>
+                                      </td>
+                                 <td id="mkb7"><button class="onoff" onclick="radiobutCheck('mk7','mkv7',this,'gremlini')"><div>off</div></button></td>
+                            </tr>
+                          <tr>
+                                <td id="mk8" title="Под наименованием грешник скрывается 4 вида ГРЕха: Государственный ГРЕхб Криминальный ГРЕх(Корпаративный или государственный), Ограниченный Корпаративный ГРЕх и Корпаративнорожденный ГРЕх. Люди с ГРЕхомпо закону всегда обязаны транслировать свой ГРЕх. Для всех легальных покупок нужен легальный ГРЕх. Это делает его наличие вексьма полезным, так что безГРЕшные обычно используют поддельные ГРЕхи(см. стр.397), что дает безГРЕшным быть частью общества.">ГРЕшник</td>
+                                <td><input id="mkv8" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td title="На этом уровне персонаж имеет так называемый Государственный ГРЕх. Родители персонажа были законопослушными гражданами государства, а он сам получил гражданство по праву рождения. Он имеет право голоса, право на выданный государством паспорт, служить в национальной армии или работать в государственных органах. Государственный ГРЕх необходим для доступа к государственным секретам и любой форме государственной армейской карьеры. Государственный ГРЕшник платит налоги в виде 15% своего совокупного дохода. Также персонаж никоим образом не связан ни с одной мегакорпорацией. Основной недостаток легального Государственного ГРЕха, это само присутствие персонажа в системе. У государства есть биометрические данные персонажа (ДНК, отпечатки пальцев, рисунок сетчатки), и они доступны органам правопорядка в Глобальном Реестре ГРЕхов. При таком раскладе вероятность отследить персонажа значительно выше. Кроме того, государства, как правило, склонны продавать информацию о ГРЕхе персонажа корпорациям.">Государственный(5):</td><td width="20%"><input id="mkv81" class="karmZn" value="-5" type="radio" name="GREH" checked></td></tr>
+                              <tr><td title="На этом уровне персонаж имеет так называемый  Криминальный ГРЕх (Корпоративный или Государственный), который заменяет все предыдущие ГРЕхи. В какой то момент жизни персонаж был арестован и отбывал срок за тяжкое уголовное преступления, после чего был заклеймён преступником  на всю оставшуюся жизнь. Закон обязывает его постоянно транслировать криминальный ГРЕх, отказ это делать есть тяжкое преступление и может привести к повторному сроку. Персонаж избегает законопослушного общества. Если у законопослушного гражданина есть выбор, он скорее предпочтёт иметь дело в безГРЕшным, чем с закоренелым преступником. Ему часто будут отказывать в доступе в некоторые места , как впрочем и в легальной работе. Зато он в всегда может рассчитывать на арест и задержание на 48 часов в случае совершения любого преступления в его районе. Подозреваемый считается виновным пока не будет доказана его невиновность, косвенных улик обычно бывает недостаточно.">Криминальный(10):</td><td><input id="mkv82" class="karmZn" value="-10" type="radio" name="GREH"></td></tr>
+                              <tr><td title="За 15 очков Кармы персонаж имеет Ограниченный Корпоративный ГРЕхю Он каким то образом получил незначительную должность в мегакорпорации. Обычно Ограниченный Корпоративный ГРЕх заменяет любые Государственные ГРЕхи, он занесён в Глобальный Реестр к которому имеют доступ правоохранительные органы и занимающиеся безопасностью корпорации. Во многих Ограниченных Корпоративных ГРЕхах записано, является ли персонаж Пробуждённым. Ограниченный Корпоративный ГРЕх позволяет персонажу получить работу в мегакорпе. Персонаж с Ограниченным Корпоративным ГРЕхом может наняться в мегакорпорацию как раб зарплаты, рядовой работник службы безопасности или в корпоративную армию.Обладающие Ограниченным Корпоративным ГРЕхом вполне могут знать кое-что о внутренних делах мегакорпорации или могут иметь ценные для конкурентов навыки, но сами по себе не являются ценными объектами для извлечения, поскольку в настоящее время не сотрудничают с корпорацией. Персонаж платит 20% своего совокупного дохода в виде налогов своей мегакорпорации">Ограниченный Корпаративный(15):</td><td><input id="mkv83" class="karmZn" value="-15" type="radio" name="GREH"></td></tr>
+                              <tr><td title="25 очков Кармы вам даст Корпоративнорождённый ГРЕх. Такой персонаж родился в мегакорпорации, когда она добилась экстерриториальности. Также у одного из его родителей был Корпоративный ГРЕх. Его выращивали для той карьеры, которая максимально ему подходит, корпорация была всем его миром. Он мог пользоваться сверхсекретным доступом и управлять практически неограниченными ресурсами. Но нечто вышвырнуло персонажа из корпорации. Многие обитатели теней смотрят на обладателя этого ГРЕха как на члена привилегированного меньшинства. Если безГРЕшные раскроют тайну ГРЕха персонажа их реакция будет негативной до враждебности. Лояльность персонажа к его корпорации никогда не подвергалась сомнению, что может помешать в обществе, построенном на сопротивлении мегакорпам. Информация о Корпоративнорождённом не покидает пределы его родной мегакорпорации. Файлы в Глобальном Реестре ГРЕхов могут сказать только то, что ГРЕх действителен. Персонаж платит 10% своего совокупного дохода в виде налогов своей мегакорпорации">Корпаративнорожденный(25):</td><td><input id="mkv84" class="karmZn" value="-25" type="radio" name="GREH"></td></tr></table>
+                                      </td>
+                                 <td id="mkb8"><button class="onoff" onclick="radiobutCheck('mk8','mkv8',this,'GREH')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk9" title="Персонаж с этим качеством испытывает трудности с общением. Он действует импульсивно, реагирует на любую провокацию и, как правило, делает всё что взбредёт в голову не задумываясь о последствиях (то есть, посылает Джонсона, зовёт пьяного тролля «трогом» или во время случайной перепалки с бегущимконкурентом бьёт его в лицо). Все Социальные проверки совершаемые персонажем для сопротивления неуместным или импульсивным порывам получают штраф к набору кубиков -2. Кроме того, затраты на получение или улучшение Социальных умений для Грубиянов вдвое выше (в том числе на этапе создания персонажа), также персонажи с этим качеством не могут выучить любую группу Социальных умений. Персонажи-Грубияны рассматриваются как «неспособные» во всех Социальных умениях, если у персонажа нет как минимум 1 рейтинга (см. Рейтинги Умений, стр. 137). МИ может потребовать от персонажа пройти проверку Успеха в таких социальных ситуациях, которые другие персонажи считают элементарными.">Грубиян</td>
+                                <td><input id="mkv9" class="karmZn" value="-14" disabled></td>
+                                <td id="mkb9"><button class="onoff" onclick="onoff('mk9','mkv9',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk10" title="У персонажа с этим качеством трясутся руки, чтосоздаёт проблемы с ловкостью и точностью. Персонаж получает штраф -2 к набору кубиков всех основанных на Ловкости проверок при проявлении симптомов. Причина может быть физиологической (например, невылеченное генетическое нарушение или повреждённые нервы), психологической или просто симптомом возраста. В нормальных обстоятельствах некоторые аугментации или лекарства могут купировать эти симптомы. Но при стрессе во время бега есть шанс на проявление Дрожащих Рук. В напряжённой обстановке (например, в бою) персонаж должен совершить проверку Ловкость+Тело (4). Успех позволяет персонажу в этот раз справиться с недугом. Провал приводит к тому, что проблема проявляется и остаётся с персонажем весь остаток бега.">Дрожащие Руки</td>
+                                <td><input id="mkv10" class="karmZn" value="-7" disabled></td>
+                                <td id="mkb10"><button class="onoff" onclick="onoff('mk10','mkv10',this, '1')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk11" title="Персонаж с этим качеством подсел на химические вещества, такие как уличные наркотики (новакок, блисс, темпо), технологические или магические устройства, такие как чипы Лучше-Обыденной-Жизни (ЛОЖь), фоки, или потенциально вызывающие привыкание виды деятельности, например азартные игры или секс. Физиологически Зависимости действуют нафункционирование Тела, вызывая боль, тошноту, трясучку и другие последствия, способные повлиять на бегущего, особенно во время ломки. Психологические Зависимости могут вызывать паранойю, тоску, бессонницу, нарушения координации, аффективные расстройства и депрессию. Особые правила проверок Зависимости, Ломки и сохранения чистоты находятся на странице 451. Значение бонуса к Карме зависит от тяжести зависимости. Она может быть: Слабой, Умеренной, Серьёзной или Сжигающей. Без лечения в течении долгого времени тяжесть усиливается. Каждая степень зависимости имеет начальный уровень дозировки, который требуется персонажу  для насыщения. Этот уровень может быть увеличен аугментациями персонажа. Чем серьёзней Зависимость персонажа, тем больше ему требуется вещества или деятельности  для удовлетворения своей страсти. При слабых формах Зависимости (Слабой и Умеренной) скрыть её последствия сравнительно легко. В худших случаях (Серьёзной и Сжигающей) физические и ментальные следствия Зависимости вполне явны. Эти признаки негативно сказываются на социальных проверках, даже если персонаж не страдает от ломки.">Зависимость</td>
+                                <td><input id="mkv11" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td title=" 1 доза или 1 час привычной деятельности: Удовлетворение Слабого пристрастия требуется персонажу раз в месяц. Если персонаж проваливает проверку Ломки, он страдает от неё, и должен искать вещество или процесс ради её облегчения. При беге это приводит к задержкам исполнения планов, которые команда готовила совместно, особенно это неприятно когда персонаж занят азартными играми или дырится ЛОЖью вместо подготовки к бегу. Пока персонаж в ломке он получает модификатор набора кубиков -2 на все свои проверки основанные на Ментальных атрибутах (в случае психологической зависимости) или на Физических атрибутах (если зависимость физиологическая). Если персонаж проходит проверку Ломки, он не страдает от ломки, и не нуждается в веществе или процессе, до следующей проверке Ломки (в следующем месяце). Этот месяц он способен оставаться чистым">Слабая (4):</td><td width="20%"><input id="mkv111" class="karmZn" value="-4" type="radio" name="zavis" checked></td></tr>
+                              <tr><td title="1 доза или 1 час привычной деятельности: Удовлетворение Умеренного пристрастия требуется персонажу раз в две недели. Если персонаж испытывает ломку, он получает модификатор набора кубиков -4 на все свои проверки основанные на Ментальных атрибутах (в случае психологической зависимости) или на Физических атрибутах (если зависимость физиологическая) пока зависимость не будет удовлетворена">Умеренная (9):</td><td><input id="mkv112" class="karmZn" value="-9" type="radio" name="zavis"></td></tr>
+                              <tr><td title="2 дозы или 2 часа привычной деятельности: Зависимость выходит из под контроля. Наркоман испытывает тягу раз в неделю. Если он проваливает проверку Ломки, то получает модификатор набора кубиков -4 на все свои проверки основанные на Ментальных атрибутах (в случае психологической зависимости) или на Физических атрибутах (если зависимость физиологическая) пока ломка не пройдёт. Кроме того, персонаж получает штраф -2 ко всем наборам кубиков при Социальных проверках, неважно, находится ли он в состоянии ломки или нет. В данном случае у персонажа почти нет возможности скрыть свои пристрастия, даже когда он их контролирует. Физические и психологические симптомы его Зависимости очевидны при близком рассмотрении.">Серьёзная (20):</td><td><input id="mkv113" class="karmZn" value="-20" type="radio" name="zavis"></td></tr>
+                              <tr><td title="минимум 3 дозы/3 часа привычной деятельности: Последняя форма наркомании. Наркоман испытывает тягу к наркотику или процессу каждый день. Пока тяга не удовлетворена, персонаж получает штраф -6 на все свои проверки основанные на Ментальных атрибутах (в случае психологической зависимости) или на Физических атрибутах (если зависимость физиологическая) пока ломка не пройдёт. Поскольку его пристрастие очевидно для невнимательного наблюдателя, персонаж получает штраф -3 ко всем наборам кубиков при Социальных проверках, неважно, находится ли он в состоянии ломки или нет. В зависимости от своего желания показать влияние зависимости на игровой процесс, МИ может указать, провалил ли Зависимый персонаж проверку Ломки во время простоя">Сжигающая (30):</td><td><input id="mkv114" class="karmZn" value="-25" type="radio" name="zavis"></td></tr></table>
+                                      </td>
+                                 <td id="mkb11"><button class="onoff" onclick="radiobutCheck('mk11','mkv11',this,'zavis')"><div>off</div></button></td>
+                            </tr>
+							<tr>
+                                <td id="mk12" title="Близкие этого персонажа зависят от него и им необходима его эмоциональная поддержка или финансовая помощь. Иждивенцами могут быть дети, родители, супруги или возлюбленные, братья, сёстры или старые приятеля. Забота о них требует существенных затрат времени и денег персонажа. Увеличьте время необходимое на изучение новых или улучшение имеющихся умений на 50%. Информация о необходимом на это времени изложена в главе Развитие Персонажа на странице 109. Также увеличьте базовое время совершения любых долгосрочных проектов на 50%. Иждивенцы также могут замедлять персонажа другими способами — мешаться под ногами, совместно использовать жилое пространство, вмешиваться в работу персонажа, одалживать его машину, звонить в самый неподходящий момент и т.д.">Иждивенцы</td>
+                                <td><input id="mkv12" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td title="За 3 очка Кармы иждивенцы иногда надоедают: внезапно приезжают (именно тогда, когда персонажу пора по делам), нуждаются в эмоциональной поддержке, любезностях или других подтверждениях дружбы/преданности, а иногда и денег. В данном случае примерами иждивенцев могут служить: брат-лодырь, постоянный друг/подруга или ребёнок, который с персонажем не проживает, но нуждается в алиментах и регулярных посещениях. Это поднимает уровень жизни персонажа на 10% в месяц.">Рейтинг1 (3):</td><td width="20%"><input id="mkv121" class="karmZn" value="-3" type="radio" name="izhdiv" checked></td></tr>
+                              <tr><td title="За 6 очков Кармы иждивенцы, это постоянное неудобство: им необходимо уделять внимание на регулярной основе, они вовлекаются в дела персонажа и разделяют с ним жизненное пространство. В данном случае примерами иждивенцев могут служить: сожитель/жена/муж или член семьи, ребёнок под совместной опекой и обычно принимаемый персонажем дома (например, через выходные), маленький ребёнок или брат, за которого отвечает персонаж. Это поднимает уровень жизни персонажа на 20% в месяц.">Рейтинг2 (6):</td><td><input id="mkv122" class="karmZn" value="-6" type="radio" name="izhdiv"></td></tr>
+                              <tr><td title="За 9 очков Кармы иждивенцы, это живущие с персонажем близкие родственники или спутники жизни. Иждивенцы требуют много времени и ресурсов персонажа, и/или требуют особой заботы и внимания, что ограничивает доступность персонажа для миссий или конкретных действий. В данном случае примерами иждивенцев могут служить: большая семья живущая в одном доме, родители или бабушки и дедушки с медицинскими или материальными потребностями и дети на полном содержании. Это поднимает уровень жизни персонажа на 30% в месяц.">Рейтинг3 (9):</td><td><input id="mkv123" class="karmZn" value="-9" type="radio" name="izhdiv"></td></tr></table>
+                                      </td>
+                                 <td id="mkb11"><button class="onoff" onclick="radiobutCheck('mk12','mkv12',this,'izhdiv')"><div>off</div></button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onClick="closeKachBut('minusKachestva', 'win2')">закрыть</button>
+        </div>
+    </div>
+<div>
+  <table border="0" width="55%" cellpadding="5">
+    <tr>
+      <td>
+        <input class="countUm2" title="Очки умений трятятся на умения" value="Очки умений:" disabled/>
+      </td>
+      <td>
+        <input class="countUm2" id="countSkils" title="Очки умений трятятся на умения" value="36" disabled/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input class="countUm2" title="Очки групп умений трятятся на группы умений" value="Очки групп умений:" disabled/>
+        </td>
+      <td>
+        <input class="countUm2" id="countGroupSkils" title="Очки групп умений трятятся на группы умений" value="5" disabled/>
+        </td>
+    </tr>
+  </table>
+    </div>
+<div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win3')" type="button">Умения</button>
+        <dl class="plusKachestva" id="SkilsArr">
+            <dt>Тут будут умения.</dt>
+        </dl>
+    </div>
+<div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win4')" type="button">Группы умений</button>
+        <dl class="plusKachestva" id="groupSkilsArr">
+            <dt>Тут будут группы умений.</dt>
+        </dl>
+    </div>
+<div id="win3" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Умения тратят очки умений">
+                <div>Умения</div>
+            </h2>
+            <div class="content" id="contentSkils">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Умение
+                                </td>
+                                <td class="karmZn">
+                                    Очки умений
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                          <tr>
+                                <td id="sk1" title="">Стрельба из лука</td>
+                                <td><input id="skv1" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1:</td><td width="20%"><input id="skv011" class="karmZn" value="1" type="radio" name="strelbaLuk" checked></td></tr>
+                              <tr><td>Рейтинг 2:</td><td><input id="skv012" class="karmZn" value="2" type="radio" name="strelbaLuk"></td></tr>
+                              <tr><td>Рейтинг 3:</td><td><input id="skv013" class="karmZn" value="3" type="radio" name="strelbaLuk"></td></tr>
+                              <tr><td>Рейтинг 4:</td><td><input id="skv014" class="karmZn" value="4" type="radio" name="strelbaLuk"></td></tr>
+                              <tr><td>Рейтинг 5:</td><td><input id="skv015" class="karmZn" value="5" type="radio" name="strelbaLuk"></td></tr>
+                              <tr><td>Рейтинг 6:</td><td><input id="skv016" class="karmZn" value="6" type="radio" name="strelbaLuk"></td></tr></table>
+                                      </td>
+                                 <td id="skb1"><button class="onoff" onclick="radiobutCheck('sk1','skv1',this,'strelbaLuk')"><div>off</div></button></td>
+                            </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <button type="button" onClick="closeKachBut('SkilsArr', 'win3')">закрыть</button>
+        </div>
+  </div>
+<div id="win4" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Умения тратят очки умений">
+                <div>Группы умений</div>
+            </h2>
+            <div class="content" id="contentGroupSkils">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Группа умений
+                                </td>
+                                <td>
+                                    Очки групп умений
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                          <tr>
+                                <td id="gsk1" title="Обман
+Имитация
+Выступления">Притворство</td>
+                                <td><input id="gskv1" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1:</td><td width="20%"><input id="gskv011" class="karmZn" value="1" type="radio" name="pritvorstvo" checked></td></tr>
+                              <tr><td>Рейтинг 2:</td><td><input id="gskv012" class="karmZn" value="2" type="radio" name="pritvorstvo"></td></tr>
+                              <tr><td>Рейтинг 3:</td><td><input id="gskv013" class="karmZn" value="3" type="radio" name="pritvorstvo"></td></tr>
+                              <tr><td>Рейтинг 4:</td><td><input id="gskv014" class="karmZn" value="4" type="radio" name="pritvorstvo"></td></tr>
+                              <tr><td>Рейтинг 5:</td><td><input id="gskv015" class="karmZn" value="5" type="radio" name="pritvorstvo"></td></tr>
+                              <tr><td>Рейтинг 6:</td><td><input id="gskv016" class="karmZn" value="6" type="radio" name="pritvorstvo"></td></tr></table>
+                                      </td>
+                                 <td id="gskb1"><button class="onoff" onclick="radiobutCheck('gsk1','gskv1',this,'pritvorstvo')"><div>off</div></button></td>
+                            </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <button type="button" onClick="closeKachBut('groupSkilsArr', 'win4')">закрыть</button>
+        </div>
+  
+  </div>
+<div>
+  <table border="0" width="35%" cellpadding="5">
+    <tr>
+      <td>
+        <input class="countUm2" title="Очки знаний и языков трятятся на знания и языки" value="Очки знаний и языков:" disabled/>
+      </td>
+      <td width="50px" >
+        <input class="countUm2" title="Очки знаний и языков трятятся на знания и языки" id="countKnoledgeLanguage" value="2" disabled/>
+      </td>
+    </tr>
+  </table>
+    </div>
+<div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win5')" type="button">Знания</button>
+        <dl class="plusKachestva" id="knoledgeArr">
+            <dt>Тут будут знания.</dt>
+        </dl>
+    </div>
+<div class="plusKachestva">
+        <button id="plusKachBut" onClick="openKachBut('win6')" type="button">Языки</button>
+        <dl class="plusKachestva" id="languageArr">
+            <dt>Тут будут языки.</dt>
+        </dl>
+    </div>
+<div id="win5" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Очки знаний и языков трятятся на знания и языки">
+                <div>Знания</div>
+            </h2>
+            <div class="content" id="knoledge">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Знания
+                                </td>
+                                <td>
+                                    Рейтинг
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                          <tr>
+                                <td id="nk1" title="">Каналы черного рынка</td>
+                                <td><input id="nkv1" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1:</td><td width="20%"><input id="nkv011" class="karmZn" value="1" type="radio" name="cherniirinok" checked></td></tr>
+                              <tr><td>Рейтинг 2:</td><td><input id="nkv012" class="karmZn" value="2" type="radio" name="cherniirinok"></td></tr>
+                              <tr><td>Рейтинг 3:</td><td><input id="nkv013" class="karmZn" value="3" type="radio" name="cherniirinok"></td></tr>
+                              <tr><td>Рейтинг 4:</td><td><input id="nkv014" class="karmZn" value="4" type="radio" name="cherniirinok"></td></tr>
+                              <tr><td>Рейтинг 5:</td><td><input id="nkv015" class="karmZn" value="5" type="radio" name="cherniirinok"></td></tr>
+                              <tr><td>Рейтинг 6:</td><td><input id="nkv016" class="karmZn" value="6" type="radio" name="cherniirinok"></td></tr></table>
+                                      </td>
+                                 <td id="nkb1"><button class="onoff" onclick="radiobutCheck('nk1','nkv1',this,'cherniirinok')"><div>off</div></button></td>
+                            </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <button type="button" onClick="closeKachBut('knoledgeArr', 'win5')">закрыть</button>
+        </div>
+  
+  </div>
+<div id="win6" style="display:none;">
+        <div class="overlay"></div>
+        <div class="visible">
+            <h2 class="countUm" title="Очки знаний и языков трятятся на знания и языки">
+                <div>Языки</div>
+            </h2>
+            <div class="content" id="language">
+                <div>
+                    <div class="table2">
+                        <table border="0" width="100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    Язык
+                                </td>
+                                <td>
+                                    Рейтинг
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                          <tr>
+                                <td id="lk1" title="">Сперетель(Эльфийский)</td>
+                                <td><input id="lkv1" class="karmZn" value="0" hidden>
+                                  <table class="karmZn" border="0">
+                              <tr><td>Рейтинг 1:</td><td width="20%"><input id="lkv011" class="karmZn" value="1" type="radio" name="speretel" checked></td></tr>
+                              <tr><td>Рейтинг 2:</td><td><input id="lkv012" class="karmZn" value="2" type="radio" name="speretel"></td></tr>
+                              <tr><td>Рейтинг 3:</td><td><input id="lkv013" class="karmZn" value="3" type="radio" name="speretel"></td></tr>
+                              <tr><td>Рейтинг 4:</td><td><input id="lkv014" class="karmZn" value="4" type="radio" name="speretel"></td></tr>
+                              <tr><td>Рейтинг 5:</td><td><input id="lkv015" class="karmZn" value="5" type="radio" name="speretel"></td></tr>
+                              <tr><td>Рейтинг 6:</td><td><input id="lkv016" class="karmZn" value="6" type="radio" name="speretel"></td></tr></table>
+                                      </td>
+                                 <td id="lkb1"><button class="onoff" onclick="radiobutCheck('lk1','lkv1',this,'speretel')"><div>off</div></button></td>
+                            </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <button type="button" onClick="closeKachBut('languageArr', 'win6')">закрыть</button>
+        </div>
+  
+  </div>
 </body>
 
-
 </html>
-<style>
-    body,
-    html {
-        height: 100%;
-        width: 100%;
-        overflow-x: hidden
-    }
-
-    body {
-        margin: 0;
-
-    }
-
-    .loader {
-        height: 100%;
-        width: 100%;
-        background: grey;
-        position: absolute;
-        opacity: 0.5;
-        visibility: hidden;
-        z-index: 1001;
-    }
-
-    .loader .l_main {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 172px;
-        height: 128px;
-        margin: 0;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%)
-    }
-
-    @media (max-width:550px) {
-        .loader {
-            -webkit-transform: scale(0.75);
-            transform: scale(0.75)
-        }
-    }
-
-    @media (max-width:440px) {
-        .loader {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5)
-        }
-    }
-
-    .l_square {
-        position: relative
-    }
-
-    .l_square:nth-child(1) {
-        margin-left: 0px
-    }
-
-    .l_square:nth-child(2) {
-        margin-left: 44px
-    }
-
-    .l_square:nth-child(3) {
-        margin-left: 88px
-    }
-
-    .l_square:nth-child(4) {
-        margin-left: 132px
-    }
-
-    .l_square span {
-        position: absolute;
-        top: 0px;
-        left: 20px;
-        height: 36px;
-        width: 36px;
-        border-radius: 2px;
-        background-color: #FFFFFF
-    }
-
-    .l_square span:nth-child(1) {
-        top: 0px
-    }
-
-    .l_square span:nth-child(2) {
-        top: 44px
-    }
-
-    .l_square span:nth-child(3) {
-        top: 88px
-    }
-
-    .l_square:nth-child(1) span {
-        -webkit-animation: animsquare1 2s infinite ease-in;
-        animation: animsquare1 2s infinite ease-in
-    }
-
-    .l_square:nth-child(2) span {
-        -webkit-animation: animsquare2 2s infinite ease-in;
-        animation: animsquare2 2s infinite ease-in
-    }
-
-    .l_square:nth-child(3) span {
-        -webkit-animation: animsquare3 2s infinite ease-in;
-        animation: animsquare3 2s infinite ease-in
-    }
-
-    .l_square:nth-child(4) span {
-        -webkit-animation: animsquare4 2s infinite ease-in;
-        animation: animsquare4 2s infinite ease-in
-    }
-
-    .l_square span:nth-child(1) {
-        -webkit-animation-delay: 0.00s;
-        animation-delay: 0.00s
-    }
-
-    .l_square span:nth-child(2) {
-        -webkit-animation-delay: 0.15s;
-        animation-delay: 0.15s
-    }
-
-    .l_square span:nth-child(3) {
-        -webkit-animation-delay: 0.30s;
-        animation-delay: 0.30s
-    }
-
-    @-webkit-keyframes animsquare1 {
-
-        0%,
-        5%,
-        95%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        30%,
-        70% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @keyframes animsquare1 {
-
-        0%,
-        5%,
-        95%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        30%,
-        70% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @-webkit-keyframes animsquare2 {
-
-        0%,
-        10%,
-        90%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        35%,
-        65% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @keyframes animsquare2 {
-
-        0%,
-        10%,
-        90%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        35%,
-        65% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @-webkit-keyframes animsquare3 {
-
-        0%,
-        15%,
-        85%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        40%,
-        60% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @keyframes animsquare3 {
-
-        0%,
-        15%,
-        85%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        40%,
-        60% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @-webkit-keyframes animsquare4 {
-
-        0%,
-        20%,
-        80%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        45%,
-        55% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-
-    @keyframes animsquare4 {
-
-        0%,
-        20%,
-        80%,
-        100% {
-            -webkit-transform: translate(0px, 0px) rotate(0deg);
-            transform: translate(0px, 0px) rotate(0deg)
-        }
-
-        45%,
-        55% {
-            -webkit-transform: translate(-40px, 0px) rotate(-90deg);
-            transform: translate(-40px, 0px) rotate(-90deg)
-        }
-    }
-</style>
